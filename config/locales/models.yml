@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      company:
+        one: "Empresa"
+        other: "Empresas"
+    attributes:
+      company:
+        name: "Nome"
+        description: "Descrição"
+        address: "Endereço Completo"
+        cnpj: "CNPJ"
+        site: "Site"
+        social_networks: "Redes sociais"

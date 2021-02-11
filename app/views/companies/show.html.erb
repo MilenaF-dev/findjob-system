@@ -1,0 +1,15 @@
+<h1><%= @company.name %></h1>
+<dl>
+  <dt><%= Company.human_attribute_name("description") %></dt>
+  <dd><%= @company.description %></dd>
+  <dt><%= Company.human_attribute_name("address") %></dt>
+  <dd><%= @company.address %></dd>
+  <dt><%= Company.human_attribute_name("cnpj") %></dt>
+  <dd><%= @company.cnpj %></dd>
+  <dt><%= Company.human_attribute_name("site") %></dt>
+  <dd><%= @company.site %></dd>
+  <dt><%= Company.human_attribute_name("social_networks") %></dt>
+  <dd><%= @company.social_networks %></dd>
+</dl>
+
+<%= link_to t("misc.back"), companies_path %>

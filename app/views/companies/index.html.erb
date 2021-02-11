@@ -1,0 +1,19 @@
+<h1><%= Company.model_name.human(count: 2) %></h1>
+
+<% if @companies.empty? %>
+  <div class="warning">Nenhuma empresa cadastrada</div>
+<% else %>
+  <dl>
+    <% @companies.each do |company| %>
+          <dt><%= Company.human_attribute_name("name") %></dt>
+          <dd><%= link_to company.name, company_path(company) %></dd>
+          <dt><%= Company.human_attribute_name("cnpj") %></dt>
+          <dd><%= company.cnpj %></dd>
+          <dt><%= Company.human_attribute_name("site") %></dt>
+          <dd><%= company.site %></dd>
+          <hr>
+    <% end %>
+  </dl>
+<% end %>
+
+<%= link_to t("misc.back"), root_path %>
