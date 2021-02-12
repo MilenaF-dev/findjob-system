@@ -2,3 +2,9 @@ pt-BR:
   companies:
     index:
       company_registration: "Registrar empresa"
+    show:
+      edit: "Editar"
+    new:
+      company_new: "Nova empresa"
+    edit:
+      company_edit: "Editar empresa"

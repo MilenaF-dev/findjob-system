@@ -1,5 +1,5 @@
-<h1>Nova empresa</h1>
+<h1><%= t(".company_new") %></h1>
 
 <%= render "form", company: @company %>
 
-<%= link_to "Voltar", companies_path %>
+<%= link_to t("misc.back"), companies_path %>
