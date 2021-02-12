@@ -1,5 +1,11 @@
 <h1><%= @company.name %></h1>
 <dl>
+  <div>
+    <% if @company.logo.attached? %>
+      <dt><%= Company.human_attribute_name("logo") %></dt>
+      <%= image_tag @company.logo %>
+    <% end %>
+  </div>
   <dt><%= Company.human_attribute_name("description") %></dt>
   <dd><%= @company.description %></dd>
   <dt><%= Company.human_attribute_name("address") %></dt>

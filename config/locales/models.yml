@@ -7,8 +7,9 @@ pt-BR:
     attributes:
       company:
         name: "Nome"
+        logo: "Logomarca"
         description: "Descrição"
-        address: "Endereço Completo"
+        address: "Endereço completo"
         cnpj: "CNPJ"
         site: "Site"
         social_networks: "Redes sociais"

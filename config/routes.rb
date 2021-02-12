@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  resources :companies, only: [:index, :show]
+  resources :companies, only: [:index, :show, :new, :create]
 end
