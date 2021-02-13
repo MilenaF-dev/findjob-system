@@ -1,5 +1,7 @@
 <h1><%= Company.model_name.human(count: 2) %></h1>
 
+<%= flash[:notice] %>
+
 <% if @companies.empty? %>
   <div class="warning">Nenhuma empresa cadastrada</div>
 <% else %>

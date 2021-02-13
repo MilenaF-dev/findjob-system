@@ -56,3 +56,30 @@ feature "Admin edit a existent company" do
     expect(current_path).to eq company_path(company)
   end
 end
+
+feature "Admin delete a existent company" do
+  scenario "have link" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+
+    visit root_path
+    click_on "Empresas"
+    click_on company.name
+
+    expect(page).to have_selector("a[href='#{company_path(company)}'][data-method='delete']", text: "Apagar")
+  end
+
+  scenario "successfully" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+
+    visit company_path(company)
+    click_on "Apagar"
+
+    expect(current_path).to eq(companies_path)
+    expect(page).to have_content("Empresa apagada com sucesso!")
+    expect(page).to_not have_content("Algorich")
+  end
+end

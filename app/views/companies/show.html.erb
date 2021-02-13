@@ -19,4 +19,7 @@
 </dl>
 
 <%= link_to t(".edit"), edit_company_path(@company) %><br>
+<%= link_to t(".apagar"), company_path(@company),
+            method: :delete,
+            data: { confirm: "Tem certeza que deseja apagar essa promoção" } %><br>
 <%= link_to t("misc.back"), companies_path %>

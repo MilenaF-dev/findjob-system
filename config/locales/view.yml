@@ -4,6 +4,7 @@ pt-BR:
       company_registration: "Registrar empresa"
     show:
       edit: "Editar"
+      delete: "Apagar"
     new:
       company_new: "Nova empresa"
     edit:
