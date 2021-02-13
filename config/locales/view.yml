@@ -9,3 +9,7 @@ pt-BR:
       company_new: "Nova empresa"
     edit:
       company_edit: "Editar empresa"
+  vacancies:
+    show:
+      salary: "De %{begin} até %{end}"
+    

@@ -4,6 +4,9 @@ pt-BR:
       company:
         one: "Empresa"
         other: "Empresas"
+      vacancy:
+        one: "Vaga disponível"
+        other: "Vagas disponíveis"
     attributes:
       company:
         name: "Nome"
@@ -13,3 +16,11 @@ pt-BR:
         cnpj: "CNPJ"
         site: "Site"
         social_networks: "Redes sociais"
+      vacancy:
+        title: "Título"
+        description: "Descrição"
+        nivel: "Nível"
+        salary_range: "Faixa salarial"
+        mandatory_requirements: "Requisitos obrigatórios"
+        deadline: "Data limite"
+        total_vacancies: "Total de vagas"
