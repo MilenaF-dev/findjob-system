@@ -52,4 +52,8 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :description, :address, :cnpj, :site, :social_networks, :logo)
   end
+
+  # def authorize_user!
+  #   user_signed_in? && current_user.company == @company
+  # end
 end
