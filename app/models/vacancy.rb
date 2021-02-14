@@ -1,5 +1,5 @@
 class Vacancy < ApplicationRecord
-  serialize :salary_range
-
   belongs_to :company
+
+  validates :title, :nivel, :mandatory_requirements, :deadline, :total_vacancies, presence: true
 end

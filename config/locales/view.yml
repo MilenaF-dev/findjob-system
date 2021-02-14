@@ -1,10 +1,14 @@
 pt-BR:
+  home:
+    index:
+      available_vacancies: "Vagas disponíveis"
   companies:
     index:
       company_registration: "Registrar empresa"
     show:
       edit: "Editar"
       delete: "Apagar"
+      vacancy_registration: "Cadastrar uma vaga"
     new:
       company_new: "Nova empresa"
     edit:
@@ -12,4 +16,7 @@ pt-BR:
   vacancies:
     show:
       salary: "De %{begin} até %{end}"
+      salary_range: "Faixa salarial"
+    new: 
+      vacancy_new: "Nova vaga"
     

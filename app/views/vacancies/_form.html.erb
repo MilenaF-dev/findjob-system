@@ -1,0 +1,62 @@
+<% if vacancy.errors.any? %>
+  <div class="alert">
+    <% if vacancy.persisted? %>
+      <p>Não foi possível editar a vaga</p>
+    <% else %>
+      <p>Não foi possível criar a vaga</p>
+    <% end %>
+    <p>Confira os erros abaixo:</p>
+    <ul>
+      <% vacancy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: vacancy do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :nivel %><br>
+    <%= form.text_field :nivel %>
+  </div>
+
+  <div>
+    <%= form.label :min_salary %><br>
+    <%= form.text_field :min_salary %>
+  </div>
+
+  <div>
+    <%= form.label :max_salary %><br>
+    <%= form.text_field :max_salary %>
+  </div>
+
+  <div>
+    <%= form.label :mandatory_requirements %><br>
+    <%= form.text_area :mandatory_requirements %>
+  </div><br>
+
+   <div>
+    <%= form.label :deadline %><br>
+    <%= form.date_field :deadline %>
+  </div>
+
+  <div>
+    <%= form.label :total_vacancies %><br>
+    <%= form.number_field :total_vacancies %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %><br>
+

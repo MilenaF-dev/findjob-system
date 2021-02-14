@@ -5,8 +5,8 @@ pt-BR:
         one: "Empresa"
         other: "Empresas"
       vacancy:
-        one: "Vaga disponível"
-        other: "Vagas disponíveis"
+        one: "Vaga"
+        other: "Vagas"
     attributes:
       company:
         name: "Nome"
@@ -20,7 +20,8 @@ pt-BR:
         title: "Título"
         description: "Descrição"
         nivel: "Nível"
-        salary_range: "Faixa salarial"
+        min_salary: "De"
+        max_salary: "Até"
         mandatory_requirements: "Requisitos obrigatórios"
         deadline: "Data limite"
         total_vacancies: "Total de vagas"

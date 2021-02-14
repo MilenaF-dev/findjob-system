@@ -53,6 +53,7 @@ feature "Visitor view companies" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+
     visit root_path
     click_on "Empresas"
     click_on "Voltar"
@@ -64,6 +65,7 @@ feature "Visitor view companies" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+
     visit root_path
     click_on "Empresas"
     click_on company.name
