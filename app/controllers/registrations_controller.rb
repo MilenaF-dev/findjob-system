@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
         @user.save
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
-        redirect_to root_path
+        redirect_to company_path(@user.company)
       end
     else
       render :new
@@ -28,6 +28,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, company_attributes: [:name, :address, :description, :cnpj, :site, :social_networks])
+    params.require(:user).permit(:email, :password, :password_confirmation, company_attributes: [:name, :logo, :address, :description, :cnpj, :site, :social_networks])
   end
 end

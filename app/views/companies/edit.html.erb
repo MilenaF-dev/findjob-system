@@ -1,5 +1,19 @@
 <h1><%= t(".company_edit") %></h1>
 
+<% if @company.errors.any? %>
+  <div class="alert">
+    <% if @company.persisted? %>
+      <p>Não foi possível editar a empresa</p>
+    <% end %>
+    <p>Confira os erros abaixo:</p>
+    <ul>
+      <% @company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= render "form", company: @company %>
 
 <%= link_to t("misc.back"), company_path(@company) %>

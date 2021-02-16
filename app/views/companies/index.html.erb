@@ -1,7 +1,5 @@
 <h1><%= Company.model_name.human(count: 2) %></h1>
 
-<%= flash[:notice] %>
-
 <% if @companies.empty? %>
   <div class="warning">Nenhuma empresa cadastrada</div>
 <% else %>
@@ -18,5 +16,4 @@
   </dl>
 <% end %>
 
-<%= link_to t(".company_registration"), new_company_path %><br>
 <%= link_to t("misc.back"), root_path %>
