@@ -21,6 +21,43 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  
+  <% if resource.admin? %>
+    <h3>Cadastrar empresa</h3>
+
+    <%= f.fields_for :company do |cf| %>
+      <div>
+        <%= cf.label :name %><br>
+        <%= cf.text_field :name %>
+      </div>
+
+      <div>
+        <%= cf.label :description %><br>
+        <%= cf.text_area :description %>
+      </div>
+
+    <div>
+      <%= cf.label :address %><br>
+      <%= cf.text_area :address %>
+    </div>
+
+    <div>
+      <%= cf.label :cnpj %><br>
+      <%= cf.text_field :cnpj %>
+    </div>
+
+    <div>
+      <%= cf.label :site %><br>
+      <%= cf.text_field :site %>
+    </div>
+
+    <div>
+      <%= cf.label :social_networks %><br>
+      <%= cf.text_field :social_networks %>
+    </div><br>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit t("misc.registration") %>
   </div>

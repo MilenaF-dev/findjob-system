@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Admin registers a vacancy" do
+feature "User registers a vacancy" do
   scenario "from index page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
