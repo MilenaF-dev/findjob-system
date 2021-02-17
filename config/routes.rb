@@ -5,5 +5,8 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :show, :edit, :update]
 
-  resources :vacancies, only: [:index, :show, :new, :create, :edit, :update]
+  resources :vacancies, only: [:index, :show, :new, :create, :edit, :update] do
+    post "disable", on: :member
+    post "enable", on: :member
+  end
 end

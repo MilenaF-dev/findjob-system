@@ -1,4 +1,9 @@
-<h1><%= @vacancy.title %></h1>
+  <% if @vacancy.disable? %>
+    <h1><%= t(".disable_title", title: @vacancy.title) %></h1>
+  <% else %>
+    <h1><%= @vacancy.title %><h1>
+  <% end %>
+
 <dl>
   <dt><%= Company.model_name.human(count: 1) %></dt>
   <dd><%= @vacancy.company.name %></dd>
@@ -14,5 +19,9 @@
   <dd><%= l(@vacancy.deadline) %></dd>
 </dl>
 
-<%= link_to t(".edit"), edit_vacancy_path(@vacancy) %>
-<%= link_to t("misc.back"), vacancies_path %>
+<% if current_user&.company == @vacancy.company %>
+  <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
+  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disable? %> 
+  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enable? %> 
+<% end %>
+<%= link_to t("misc.back"), :back %>

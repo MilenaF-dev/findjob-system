@@ -9,6 +9,7 @@ pt-BR:
       edit: "Editar"
       delete: "Apagar"
       vacancy_registration: "Cadastrar uma vaga"
+      company_vacancies: "Vagas desta empresa"
     new:
       company_new: "Nova empresa"
     edit:
@@ -18,6 +19,9 @@ pt-BR:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"
       edit: "Editar"
+      disable_vacancy: "Desabilitar vaga"
+      enable_vacancy: "Habilitar vaga"
+      disable_title: "%{title} (Vaga desabilitada)"
     new: 
       vacancy_new: "Nova vaga"
     edit:

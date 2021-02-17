@@ -22,6 +22,23 @@
   <%= link_to t(".edit"), edit_company_path(@company) %><br>
 <% end %>
 
-<%= link_to t(".vacancy_registration"), new_vacancy_path %><br>
+<% if current_user&.company == @company %>
+  <%= link_to t(".vacancy_registration"), new_vacancy_path %><br>
+<% end %>
+
+<h2><%= t(".company_vacancies") %></h2>
+<% if @company.vacancies.empty? %>
+  <div class="warning">Nenhuma vaga disponível</div>
+<% else %>
+    <dl>
+    <% @company.vacancies.each do |vacancy| %>
+        <dt><%= Vacancy.human_attribute_name("title") %></dt>
+        <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
+        <dt><%= Vacancy.human_attribute_name("description") %></dt>
+        <dd><%= vacancy.description %></dd>
+        <hr>
+    <% end %>
+    </dl>
+<% end %>
 
 <%= link_to t("misc.back"), companies_path %>

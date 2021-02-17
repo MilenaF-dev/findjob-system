@@ -121,9 +121,14 @@ feature "Admin edit a existent company" do
                                     cnpj: "543.123.678/010", site: "tech.com.br", social_networks: "@tech.dev", domain: "dev.com")
     user = User.create!(email: "milena@dev.com", password: "123456", company: other_company, admin: true)
 
+    login(user.email, "123456")
     get edit_company_path(company)
 
     expect(response.status).to eq(404)
+  end
+
+  def login(email, password)
+    post user_session_path, params: { user: { email: email, password: password } }
   end
 end
 

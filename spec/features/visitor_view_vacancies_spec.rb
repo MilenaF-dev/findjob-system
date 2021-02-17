@@ -8,11 +8,11 @@ feature "Visitor view available vacancies" do
     Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                     min_salary: 1500, max_salary: 3000, nivel: "Júnior",
                     mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                    deadline: "22/10/2021", total_vacancies: "3", company: company)
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enable)
     Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
                     min_salary: 8000, max_salary: 12000, nivel: "Sênior",
                     mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
-                    deadline: "22/10/2021", total_vacancies: "2", company: company)
+                    deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enable)
 
     visit root_path
     click_on "Vagas disponíveis"
@@ -33,7 +33,7 @@ feature "Visitor view available vacancies" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, nivel: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company)
+                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enable)
 
     visit root_path
     click_on "Vagas disponíveis"
@@ -63,7 +63,7 @@ feature "Visitor view available vacancies" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 30000, nivel: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company)
+                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enable)
 
     visit root_path
     click_on "Vagas disponíveis"
@@ -79,7 +79,7 @@ feature "Visitor view available vacancies" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, nivel: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company)
+                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enable)
 
     visit root_path
     click_on "Vagas disponíveis"
@@ -87,5 +87,31 @@ feature "Visitor view available vacancies" do
     click_on "Voltar"
 
     expect(current_path).to eq vacancies_path
+  end
+
+  scenario "only vacancies from a company" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                    min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                    mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enable)
+    Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
+                    deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enable)
+
+    visit root_path
+    click_on "Empresas"
+    click_on company.name
+
+    expect(current_path).to eq(company_path(company))
+    expect(page).to have_content("Algorich")
+    expect(page).to have_content("Vagas desta empresa")
+    expect(page).to have_link("Dev Júnior")
+    expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
+    expect(page).to have_link("Dev Sênior")
+    expect(page).to have_content("Vaga de desenvolvidor sênior Ruby on Rails")
   end
 end

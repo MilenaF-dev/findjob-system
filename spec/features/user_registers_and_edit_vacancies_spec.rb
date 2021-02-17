@@ -5,7 +5,9 @@ feature "User registers a vacancy" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    login_as employee
     visit root_path
     click_on "Empresas"
     click_on company.name
@@ -14,11 +16,26 @@ feature "User registers a vacancy" do
                               href: new_vacancy_path)
   end
 
-  scenario "successfully" do
+  scenario "button disappers if employee is not logged" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
 
+    visit root_path
+    click_on "Empresas"
+    click_on company.name
+
+    expect(page).not_to have_link("Cadastrar uma vaga",
+                                  href: new_vacancy_path)
+  end
+
+  scenario "successfully" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee
     visit root_path
     click_on "Empresas"
     click_on company.name
@@ -46,6 +63,12 @@ feature "User registers a vacancy" do
   end
 
   scenario "and attributes cannot be blank" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee
     visit new_vacancy_path
 
     fill_in "Título", with: ""
@@ -70,7 +93,9 @@ feature "User registers a vacancy" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    login_as employee
     visit root_path
     click_on "Empresas"
     click_on company.name
@@ -79,6 +104,25 @@ feature "User registers a vacancy" do
 
     expect(current_path).to eq(company_path(company))
   end
+
+  # scenario "registration request protected if employee is from other company", type: :request do
+  #   company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+  #                             address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+  #                             cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
+  #   other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento",
+  #                                   address: "Campos dos Goytacazes-RJ",
+  #                                   cnpj: "543.123.678/010", site: "tech.com.br", social_networks: "@tech.dev", domain: "dev.com")
+  #   user = User.create!(email: "milena@dev.com", password: "123456", company: other_company, admin: true)
+
+  #   login(user.email, "123456")
+  #   get new_vacancy_path
+
+  #   expect(response.status).to eq(404)
+  # end
+
+  # def login(email, password)
+  #   post user_session_path, params: { user: { email: email, password: password } }
+  # end
 end
 
 feature "User edit a existent vacancy" do
@@ -89,14 +133,33 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    login_as employee
     visit root_path
     click_on "Vagas disponíveis"
     click_on vacancy.title
 
     expect(page).to have_link("Editar",
                               href: edit_vacancy_path(vacancy))
+  end
+
+  scenario "button disappers if employee is not logged" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+
+    visit root_path
+    click_on "Vagas disponíveis"
+    click_on vacancy.title
+
+    expect(page).not_to have_link("Editar",
+                                  href: edit_vacancy_path(vacancy))
   end
 
   scenario "successfully" do
@@ -106,8 +169,10 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    login_as employee
     visit vacancy_path(vacancy)
     click_on "Editar"
 
@@ -130,8 +195,10 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    login_as employee
     visit root_path
     click_on "Vagas disponíveis"
     click_on vacancy.title
@@ -139,5 +206,43 @@ feature "User edit a existent vacancy" do
     click_on "Voltar"
 
     expect(current_path).to eq(vacancy_path(vacancy))
+  end
+
+  # Passar testes de request para outro arquivo
+  scenario "edit request protected if employee is not logged", type: :request do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+
+    get edit_vacancy_path(vacancy)
+
+    expect(response.status).to eq(404)
+  end
+
+  scenario "edit request protected if employee is from other company", type: :request do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
+    other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento",
+                                    address: "Campos dos Goytacazes-RJ",
+                                    cnpj: "543.123.678/010", site: "tech.com.br", social_networks: "@tech.dev", domain: "dev.com")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+    employee = User.create!(email: "milena@dev.com", password: "123456", company: other_company, admin: true)
+
+    login(employee.email, "123456")
+    get edit_vacancy_path(vacancy)
+
+    expect(response.status).to eq(404)
+  end
+
+  def login(email, password)
+    post user_session_path, params: { user: { email: email, password: password } }
   end
 end
