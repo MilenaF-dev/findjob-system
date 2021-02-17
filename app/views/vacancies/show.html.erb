@@ -14,4 +14,5 @@
   <dd><%= l(@vacancy.deadline) %></dd>
 </dl>
 
+<%= link_to t(".edit"), edit_vacancy_path(@vacancy) %>
 <%= link_to t("misc.back"), vacancies_path %>

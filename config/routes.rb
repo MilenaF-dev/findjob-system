@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :show, :edit, :update]
 
-  resources :vacancies, only: [:index, :show, :new, :create]
+  resources :vacancies, only: [:index, :show, :new, :create, :edit, :update]
 end

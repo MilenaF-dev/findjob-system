@@ -22,6 +22,20 @@ class VacanciesController < ApplicationController
     end
   end
 
+  def edit
+    @vacancy = Vacancy.find(params[:id])
+  end
+
+  def update
+    @vacancy = Vacancy.find(params[:id])
+
+    if @vacancy.update(vacancy_params)
+      redirect_to vacancy_path(@vacancy)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def vacancy_params

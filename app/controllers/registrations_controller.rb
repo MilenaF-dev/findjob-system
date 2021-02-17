@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @user.company.blank?
         @user.admin = true
         @user.company = Company.new
-        flash[:notice] = "Nenhuma empresa cadastrada com esse domínio. Para continuar, cadastre sua empresa!"
+        flash[:notice] = t("misc.company_notice")
         render :new
       else
         unless @user.company.persisted?

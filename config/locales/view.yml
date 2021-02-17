@@ -17,6 +17,8 @@ pt-BR:
     show:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"
+      edit: "Editar"
     new: 
       vacancy_new: "Nova vaga"
-    
+    edit:
+      vacancy_edit: "Editar vaga"
