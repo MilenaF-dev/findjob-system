@@ -1,4 +1,4 @@
-  <% if @vacancy.disable? %>
+  <% if @vacancy.disabled? %>
     <h1><%= t(".disabled_title", title: @vacancy.title) %></h1>
   <% else %>
     <h1><%= @vacancy.title %></h1>
@@ -25,7 +25,7 @@
 
 <% if current_user&.company == @vacancy.company %>
   <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
-  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disable? %> 
-  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enable? %> 
+  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %> 
+  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %> 
 <% end %>
 <%= link_to t("misc.back"), :back %>

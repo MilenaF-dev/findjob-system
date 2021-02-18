@@ -42,7 +42,7 @@ class VacanciesController < ApplicationController
     set_vacancy
     authorize_employee
 
-    @vacancy.disable!
+    @vacancy.disabled!
 
     redirect_to vacancy_path(@vacancy)
   end
@@ -51,7 +51,7 @@ class VacanciesController < ApplicationController
     set_vacancy
     authorize_employee
 
-    @vacancy.enable!
+    @vacancy.enabled!
 
     redirect_to vacancy_path(@vacancy)
   end

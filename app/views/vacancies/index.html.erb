@@ -5,7 +5,7 @@
 <% else %>
     <dl>
     <% @vacancies.each do |vacancy| %>
-      <% if vacancy.enable? %>
+      <% if vacancy.enabled? && vacancy.deadline > Date.today %>
         <dt><%= Vacancy.human_attribute_name("title") %></dt>
         <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
         <dt><%= Vacancy.human_attribute_name("nivel") %></dt>

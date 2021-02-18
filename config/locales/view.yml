@@ -11,6 +11,7 @@ pt-BR:
       vacancy_registration: "Cadastrar uma vaga"
       company_vacancies: "Vagas desta empresa"
       disabled_vacancy: " (Vaga desabilitada)"
+      deadline_exceeded: " (Vaga expirada)"
     new:
       company_new: "Nova empresa"
     edit:

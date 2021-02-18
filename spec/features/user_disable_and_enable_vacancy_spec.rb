@@ -8,7 +8,7 @@ feature "User disable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -20,7 +20,7 @@ feature "User disable vacancy" do
 
     vacancy.reload
     expect(page).to have_content("Dev Júnior (Vaga desabilitada)")
-    expect(vacancy).to be_disable
+    expect(vacancy).to be_disabled
   end
 
   scenario "does not view button if vacancy is disable" do
@@ -30,7 +30,7 @@ feature "User disable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -47,7 +47,7 @@ feature "User disable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
 
     visit vacancy_path(vacancy)
 
@@ -63,7 +63,7 @@ feature "User enable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -75,7 +75,7 @@ feature "User enable vacancy" do
 
     vacancy.reload
     expect(page).to have_content("Dev Júnior")
-    expect(vacancy).to be_enable
+    expect(vacancy).to be_enabled
   end
 
   scenario "does not view button if vacancy is enable" do
@@ -85,7 +85,7 @@ feature "User enable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -102,7 +102,7 @@ feature "User enable vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
 
     visit vacancy_path(vacancy)
 

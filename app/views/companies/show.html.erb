@@ -32,15 +32,20 @@
 <% else %>
     <dl>
     <% @company.vacancies.each do |vacancy| %>
-      <% if vacancy.enable? %>
+      <% if vacancy.enabled? && vacancy.deadline > Date.today %>
         <dt><%= Vacancy.human_attribute_name("title") %></dt>
         <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
         <dt><%= Vacancy.human_attribute_name("description") %></dt>
         <dd><%= vacancy.description %></dd>
         <hr>
       <% elsif current_user&.company == @company %>
-        <dt><%= Vacancy.human_attribute_name("title") %></dt>
-        <dd><%= link_to vacancy.title, vacancy_path(vacancy) %><%= t(".disabled_vacancy") %></dd>
+        <% if vacancy.deadline < Date.today %>
+          <dt><%= Vacancy.human_attribute_name("title") %></dt>
+          <dd><%= link_to vacancy.title, vacancy_path(vacancy) %><%= t(".deadline_exceeded") %></dd>
+        <% else %>
+          <dt><%= Vacancy.human_attribute_name("title") %></dt>
+          <dd><%= link_to vacancy.title, vacancy_path(vacancy) %><%= t(".disabled_vacancy") %></dd>
+        <% end %>
         <dt><%= Vacancy.human_attribute_name("description") %></dt>
         <dd><%= vacancy.description %></dd>
         <hr>

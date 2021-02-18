@@ -115,7 +115,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -134,7 +134,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
 
     visit root_path
     click_on "Vagas disponíveis"
@@ -151,7 +151,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -177,7 +177,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -208,7 +208,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -229,7 +229,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
 
     get edit_vacancy_path(vacancy)
 
@@ -246,7 +246,7 @@ feature "User edit a existent vacancy" do
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               nivel: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@dev.com", password: "123456", company: other_company, admin: true)
 
     login(employee.email, "123456")
