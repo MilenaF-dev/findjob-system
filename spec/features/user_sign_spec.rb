@@ -3,8 +3,11 @@ require "rails_helper"
 feature "User sign up without a company" do
   scenario "need to register company" do
     visit root_path
-    click_on "Registrar-se"
-
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
+    
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
       fill_in "Senha", with: "123456"
@@ -17,7 +20,10 @@ feature "User sign up without a company" do
 
   scenario "successfully" do
     visit root_path
-    click_on "Registrar-se"
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
 
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
@@ -57,8 +63,10 @@ feature "User sign up without a company" do
 
   scenario "and company attributes cannot be blank" do
     visit root_path
-    click_on "Registrar-se"
-
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
       fill_in "Senha", with: "123456"
@@ -93,7 +101,10 @@ feature "User sign up without a company" do
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
 
     visit root_path
-    click_on "Registrar-se"
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
 
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
@@ -122,7 +133,10 @@ feature "User sign up for an existent company" do
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
 
     visit root_path
-    click_on "Registrar-se"
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
 
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
@@ -138,7 +152,11 @@ feature "User sign up for an existent company" do
 
   scenario "and attributes cannot be blank" do
     visit root_path
-    click_on "Registrar-se"
+    click_on "Acesso empresa"
+    within("div.links") do
+      click_on "Registrar-se"
+    end
+
     within("form") do
       fill_in "E-mail", with: ""
       fill_in "Senha", with: ""
@@ -159,7 +177,8 @@ feature "User sign in" do
     user = User.create!(email: "milena@email.com", password: "123456", company: company)
 
     visit root_path
-    click_on "Entrar"
+    click_on "Acesso empresa"
+
     within("form") do
       fill_in "E-mail", with: user.email
       fill_in "Senha", with: "123456"
@@ -180,7 +199,8 @@ feature "User sign in" do
     user = User.create!(email: "milena@email.com", password: "123456", company: company)
 
     visit root_path
-    click_on "Entrar"
+    click_on "Acesso empresa"
+
     within("form") do
       fill_in "E-mail", with: user.email
       fill_in "Senha", with: "123456"
@@ -192,8 +212,17 @@ feature "User sign in" do
     within("nav") do
       expect(page).not_to have_link("Sair")
       expect(page).not_to have_content(user.email)
+      expect(page).to have_link("Acesso empresa")
       expect(page).to have_link("Entrar")
       expect(page).to have_link("Registrar-se")
     end
+  end
+
+  scenario "and return to homepage" do
+    visit root_path
+    click_on "Acesso empresa"
+    click_on "Voltar"
+
+    expect(current_path).to eq(root_path)
   end
 end

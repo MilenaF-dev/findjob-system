@@ -1,6 +1,7 @@
-class RegistrationsController < Devise::RegistrationsController
+# frozen_string_literal: true
+
+class Users::RegistrationsController < Devise::RegistrationsController
   def create
-    byebug
     @user = User.new(sign_up_params)
 
     if @user.valid?

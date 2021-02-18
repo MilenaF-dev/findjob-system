@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     attributes:
-      user:
+      candidate:
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
         confirmed_at: Confirmado em
@@ -25,9 +25,13 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
+        full_name: Nome completo
+        cpf: CPF
+        phone: Telefone
+        biography: Biografia resumida
     models:
-      user: Usuário
-  devise: 
+      candidate: Candidato
+  candidates: 
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso.
       new:
@@ -143,23 +147,10 @@ pt-BR:
       not_saved:
         one: 'Não foi possível salvar %{resource}: 1 erro'
         other: 'Não foi possível salvar %{resource}: %{count} erros.'
-  users:
-    shared:
-      links:
-        back: Voltar
-        didn_t_receive_confirmation_instructions: Não recebeu instruções de confirmação?
-        didn_t_receive_unlock_instructions: Não recebeu instruções de desbloqueio?
-        forgot_your_password: Esqueceu sua senha?
-        sign_in: Login
-        sign_in_with_provider: Entrar com %{provider}
-        sign_up: Inscrever-se
-      minimum_password_length:
-        one: "(Mínimo de %{count} caractere)"
-        other: "(Mínimo de %{count} caracteres)"
   misc:
     enter: Entrar
     exit: Sair
     back: Voltar
     registration: "Registrar-se"
-    company_access: "Acesso empresa"
-    company_notice: "Nenhuma empresa cadastrada com esse domínio. Para continuar, cadastre sua empresa!"
+    update: Atualizar
+    

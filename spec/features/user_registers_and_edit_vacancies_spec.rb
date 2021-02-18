@@ -1,6 +1,12 @@
 require "rails_helper"
 
 feature "User registers a vacancy" do
+  scenario "must be signed in" do
+    visit new_vacancy_path
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario "from index page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
@@ -108,6 +114,20 @@ feature "User registers a vacancy" do
 end
 
 feature "User edit a existent vacancy" do
+  scenario "must be signed in" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
+
+    visit edit_vacancy_path(vacancy)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario "from index page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
@@ -222,20 +242,6 @@ feature "User edit a existent vacancy" do
   end
 
   # Passar testes de request para outro arquivo
-  scenario "edit request protected if employee is not logged", type: :request do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
-    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
-                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
-
-    get edit_vacancy_path(vacancy)
-
-    expect(response.status).to eq(404)
-  end
-
   scenario "edit request protected if employee is from other company", type: :request do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",

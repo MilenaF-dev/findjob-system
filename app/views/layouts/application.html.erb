@@ -15,9 +15,14 @@
       <% if user_signed_in? %>
         <%= current_user.email %>
         <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete %>
+      <% elsif candidate_signed_in? %>
+        <%= current_candidate.email %>
+        <%= link_to "Editar perfil", edit_candidate_registration_path %>
+        <%= link_to t("misc.exit"), destroy_candidate_session_path, method: :delete %>
       <% else %>
-        <%= link_to t("misc.registration"), new_user_registration_path %>
-        <%= link_to t("misc.enter"), new_user_session_path %>
+        <%= link_to t("misc.registration"), new_candidate_registration_path %>
+        <%= link_to t("misc.enter"), new_candidate_session_path %>
+        <%= link_to t("misc.company_access"), new_user_session_path %>
       <% end %>
     </nav>
 
