@@ -10,6 +10,7 @@ pt-BR:
       delete: "Apagar"
       vacancy_registration: "Cadastrar uma vaga"
       company_vacancies: "Vagas desta empresa"
+      disabled_vacancy: " (Vaga desabilitada)"
     new:
       company_new: "Nova empresa"
     edit:
@@ -21,7 +22,7 @@ pt-BR:
       edit: "Editar"
       disable_vacancy: "Desabilitar vaga"
       enable_vacancy: "Habilitar vaga"
-      disable_title: "%{title} (Vaga desabilitada)"
+      disabled_title: "%{title} (Vaga desabilitada)"
     new: 
       vacancy_new: "Nova vaga"
     edit:

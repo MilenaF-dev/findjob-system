@@ -1,7 +1,7 @@
   <% if @vacancy.disable? %>
-    <h1><%= t(".disable_title", title: @vacancy.title) %></h1>
+    <h1><%= t(".disabled_title", title: @vacancy.title) %></h1>
   <% else %>
-    <h1><%= @vacancy.title %><h1>
+    <h1><%= @vacancy.title %></h1>
   <% end %>
 
 <dl>
@@ -17,6 +17,10 @@
   <dd><%= @vacancy.mandatory_requirements %></dd>
   <dt><%= Vacancy.human_attribute_name("deadline") %></dt>
   <dd><%= l(@vacancy.deadline) %></dd>
+   <% if current_user&.company == @vacancy.company %>
+    <dt><%= Vacancy.human_attribute_name("total_vacancies") %></dt>
+    <dd><%= @vacancy.total_vacancies %></dd>
+    <% end %>
 </dl>
 
 <% if current_user&.company == @vacancy.company %>

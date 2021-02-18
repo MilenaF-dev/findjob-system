@@ -48,12 +48,12 @@ feature "User registers a vacancy" do
     fill_in "Até", with: 3000
     fill_in "Requisitos obrigatórios", with: "Conhecimentos em Ruby, Rails, SQLite"
     fill_in "Data limite", with: "22/10/2021"
-    fill_in "Total de vagas", with: 3
+    fill_in "Total de vagas", with: 7
     click_on "Criar Vaga"
 
     expect(current_path).to eq(vacancy_path(Vacancy.last))
     expect(page).to have_content("Dev Júnior")
-    # expect(page).to have_content("Algorich")
+    expect(page).to have_content("Algorich")
     expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
     expect(page).to have_content("Júnior")
     expect(page).to have_content("De R$ 1.500,00 até R$ 3.000,00")
@@ -78,6 +78,7 @@ feature "User registers a vacancy" do
     fill_in "Até", with: nil
     fill_in "Requisitos obrigatórios", with: ""
     fill_in "Data limite", with: ""
+    fill_in "Total de vagas", with: ""
     click_on "Criar Vaga"
 
     expect(Vacancy.count).to eq 0
@@ -104,25 +105,6 @@ feature "User registers a vacancy" do
 
     expect(current_path).to eq(company_path(company))
   end
-
-  # scenario "registration request protected if employee is from other company", type: :request do
-  #   company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-  #                             address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-  #                             cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
-  #   other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento",
-  #                                   address: "Campos dos Goytacazes-RJ",
-  #                                   cnpj: "543.123.678/010", site: "tech.com.br", social_networks: "@tech.dev", domain: "dev.com")
-  #   user = User.create!(email: "milena@dev.com", password: "123456", company: other_company, admin: true)
-
-  #   login(user.email, "123456")
-  #   get new_vacancy_path
-
-  #   expect(response.status).to eq(404)
-  # end
-
-  # def login(email, password)
-  #   post user_session_path, params: { user: { email: email, password: password } }
-  # end
 end
 
 feature "User edit a existent vacancy" do
@@ -186,6 +168,37 @@ feature "User edit a existent vacancy" do
     expect(page).to have_content("De R$ 1.000,00 até R$ 3.000,0")
     expect(page).to have_content("30/08/2022")
     expect(page).to have_link("Voltar")
+  end
+
+  scenario "and attributes cannot be blank" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enable)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee
+    visit edit_vacancy_path(vacancy)
+
+    fill_in "Título", with: ""
+    fill_in "Descrição", with: ""
+    fill_in "Nível", with: ""
+    fill_in "De", with: nil
+    fill_in "Até", with: nil
+    fill_in "Requisitos obrigatórios", with: ""
+    fill_in "Data limite", with: ""
+    fill_in "Total de vagas", with: ""
+    click_on "Atualizar Vaga"
+
+    expect(page).to have_content("Não foi possível editar a vaga")
+    expect(page).to have_content("Título não pode ficar em branco")
+    expect(page).to have_content("Nível não pode ficar em branco")
+    expect(page).to have_content("Requisitos obrigatórios não pode ficar em branco")
+    expect(page).to have_content("Data limite não pode ficar em branco")
+    expect(page).to have_content("Total de vagas não pode ficar em branco")
   end
 
   scenario "and return to vacancy page" do

@@ -5,6 +5,7 @@
 <% else %>
     <dl>
     <% @vacancies.each do |vacancy| %>
+      <% if vacancy.enable? %>
         <dt><%= Vacancy.human_attribute_name("title") %></dt>
         <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
         <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
@@ -12,6 +13,7 @@
         <dt><%= Company.model_name.human(count: 1) %></dt>
         <dd><%= vacancy.company.name %></dd>
         <hr>
+      <% end %>
     <% end %>
     </dl>
 <% end %>
