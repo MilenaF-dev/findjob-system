@@ -1,43 +1,65 @@
-<h2>Editar Perfil <%= resource_name.to_s.humanize %></h2>
+<h2><%= t(".title", resource: Candidate.model_name.human(count: 1)) %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "candidates/shared/error_messages", resource: resource %>
+<div class="edit_form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "candidates/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= f.label :full_name %><br />
+      <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name" %>
+    </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Aguardando comfirmação para: <%= resource.unconfirmed_email %></div>
-  <% end %>
+    <div class="field">
+      <%= f.label :cpf %><br />
+      <%= f.text_field :cpf, autofocus: true, autocomplete: "cpf" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(deixe em branco caso não queira alterar)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em>minímo de <%= @minimum_password_length %> caracteres</em>
+    <div class="field">
+      <%= f.label :phone %><br />
+      <%= f.text_field :phone, autofocus: true, autocomplete: "phone" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :biography %><br />
+      <%= f.text_area :biography, autofocus: true, autocomplete: "biography" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></div>
     <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %> <i><%= t(".leave_blank_if_you_don_t_want_to_change_it") %></i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= t(".minimum_of_characters", length: @minimum_password_length) %></em>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(digite sua senha atual para confirmar as mudanças)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit t("misc.update") %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :current_password %> <i><%= t(".we_need_your_current_password_to_confirm_your_changes") %></i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
 
-<h3>Cancel my account</h3>
+    <div class="actions">
+      <%= f.submit t("misc.update") %>
+    </div>
+  <% end %>
+</div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<h3><%= t(".cancel_my_account") %></h3>
 
-<%= link_to "Back", :back %>
+<p><%= t(".unhappy") %><%= button_to t(".cancel"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete %></p>
+
+<%= link_to t("misc.back"), :back %>
