@@ -12,7 +12,7 @@
 - [X] Colaborador preenche dados da empresa, caso seja a primeira pessoa da empresa a se cadastrar;
 - [X] Colaborador cadastra uma nova vaga de emprego;
 - [X] Visitante navega pelo site e vê as empresas cadastradas;
-- [ ] Visitante decide se inscrever para uma vaga;
+- [X] Visitante decide se inscrever para uma vaga;
 - [X] Visitante cria sua conta e preenche um perfil para confirmar sua candidatura;
 - [ ] Colaborador da empresa visualiza as candidaturas recebidas;
 - [ ] Colaborador da empresa faz uma proposta para um candidato;

@@ -65,6 +65,7 @@ feature "User registers a vacancy" do
     expect(page).to have_content("De R$ 1.500,00 até R$ 3.000,00")
     expect(page).to have_content("Conhecimentos em Ruby, Rails, SQLite")
     expect(page).to have_content("22/10/2021")
+    expect(page).not_to have_link("Aplicar para esta vaga")
     expect(page).to have_link("Voltar")
   end
 

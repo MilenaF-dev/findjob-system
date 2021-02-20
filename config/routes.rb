@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   resources :vacancies, only: [:index, :show, :new, :create, :edit, :update] do
     post "disable", on: :member
     post "enable", on: :member
+
+    resources :job_applications, only: [:create]
   end
 end

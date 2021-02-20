@@ -23,6 +23,10 @@
     <% end %>
 </dl>
 
+<% unless current_user || @vacancy.candidates.include?(current_candidate) %>
+  <%= link_to "Aplicar para esta vaga", vacancy_job_applications_path(@vacancy), method: :post %><br>
+<% end %>
+
 <% if current_user&.company == @vacancy.company %>
   <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
   <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %> 

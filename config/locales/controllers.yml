@@ -1,0 +1,5 @@
+pt-BR:
+  job_applications: 
+    messages: 
+      created: Candidatura realizada com sucesso!
+      already_created: "Você já se candidatou para esta vaga"
