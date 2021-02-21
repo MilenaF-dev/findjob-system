@@ -1,19 +1,17 @@
 <h1><%= Vacancy.model_name.human(count: 2) %></h1>
 
 <% if @vacancies.empty? %>
-  <div class="warning">Nenhuma vaga disponível</div>
+  <div class="warning"><%= t(".no_vacancy_available") %></div>
 <% else %>
     <dl>
     <% @vacancies.each do |vacancy| %>
-      <% if vacancy.enabled? && vacancy.deadline > Date.today %>
-        <dt><%= Vacancy.human_attribute_name("title") %></dt>
-        <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
-        <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
-        <dd><%= vacancy.nivel %></dd>
-        <dt><%= Company.model_name.human(count: 1) %></dt>
-        <dd><%= vacancy.company.name %></dd>
-        <hr>
-      <% end %>
+      <dt><%= Vacancy.human_attribute_name("title") %></dt>
+      <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
+      <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
+      <dd><%= vacancy.nivel %></dd>
+      <dt><%= Company.model_name.human %></dt>
+      <dd><%= vacancy.company.name %></dd>
+      <hr>
     <% end %>
     </dl>
 <% end %>

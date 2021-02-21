@@ -12,11 +12,14 @@ pt-BR:
       company_vacancies: "Vagas desta empresa"
       disabled_vacancy: " (Vaga desabilitada)"
       deadline_exceeded: " (Vaga expirada)"
+      no_vacancy_available: "Nenhuma vaga disponível"
     new:
       company_new: "Nova empresa"
     edit:
       company_edit: "Editar empresa"
   vacancies:
+    index:
+      no_vacancy_available: "Nenhuma vaga disponível"
     show:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"

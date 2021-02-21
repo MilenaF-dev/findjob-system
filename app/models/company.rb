@@ -1,7 +1,6 @@
 class Company < ApplicationRecord
-  has_one_attached :logo do |attachable|
-    attachable.variant :thumb, resize: "100x100"
-  end
+  has_one_attached :logo
+
   has_many :users
   has_many :vacancies
 

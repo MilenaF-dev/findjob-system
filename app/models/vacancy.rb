@@ -6,4 +6,6 @@ class Vacancy < ApplicationRecord
   enum status: { enabled: 0, disabled: 5 }
 
   validates :title, :nivel, :mandatory_requirements, :deadline, :total_vacancies, presence: true
+
+  scope :future, -> { where("deadline >= ?", Date.current) }
 end

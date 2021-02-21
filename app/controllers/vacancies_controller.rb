@@ -2,7 +2,7 @@ class VacanciesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :disable, :enable]
 
   def index
-    @vacancies = Vacancy.all
+    @vacancies = Vacancy.enabled.future
   end
 
   def show
