@@ -107,6 +107,47 @@ feature "Candidate sign in" do
   end
 end
 
+feature "Candidate views his profile" do
+  scenario "must be signed in" do
+    candidate = Candidate.create!(full_name: "Milena Ferreira", cpf: "11111111", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "milena@mail.com", password: "123456")
+
+    visit candidate_path(candidate)
+
+    expect(page).to have_content("Precisa estar logado")
+  end
+
+  scenario "have link" do
+    candidate = Candidate.create!(full_name: "Milena Ferreira", cpf: "11111111", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "milena@mail.com", password: "123456")
+
+    login_as candidate, scope: :candidate
+    visit root_path
+
+    expect(page).to have_link("Meu perfil")
+  end
+
+  scenario "successfully" do
+    candidate = Candidate.create!(full_name: "Milena Ferreira", cpf: "11111111", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "milena@mail.com", password: "123456")
+
+    login_as candidate, scope: :candidate
+    visit root_path
+    click_on "Meu perfil"
+
+    expect(current_path).to eq(candidate_path(candidate))
+    expect(page).to have_content("Milena Ferreira")
+    expect(page).to have_content("11111111")
+    expect(page).to have_content("9999999")
+    expect(page).to have_content("Tenho 25 anos, formada em Economia")
+    expect(page).to have_link("Editar perfil")
+    expect(page).to have_link("Voltar")
+  end
+end
+
 feature "Candidate edit profile" do
   scenario "must be signed in" do
     visit edit_candidate_registration_path
@@ -121,6 +162,7 @@ feature "Candidate edit profile" do
 
     login_as candidate, scope: :candidate
     visit root_path
+    click_on "Meu perfil"
     click_on "Editar perfil"
 
     within("div.edit_form") do
@@ -146,6 +188,7 @@ feature "Candidate edit profile" do
 
     login_as candidate, scope: :candidate
     visit root_path
+    click_on "Meu perfil"
     click_on "Editar perfil"
 
     within("div.edit_form") do
@@ -176,6 +219,7 @@ feature "Candidate edit profile" do
 
     login_as candidate, scope: :candidate
     visit root_path
+    click_on "Meu perfil"
     click_on "Editar perfil"
 
     within("div.edit_form") do

@@ -77,6 +77,33 @@ feature "Employee views all applications" do
     expect(page).to have_content(candidate.email)
   end
 
+  scenario "employee views candidate profile" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+    candidate = Candidate.create!(full_name: "Carlos Ferreira", cpf: "84394789374", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "carlos@mail.com", password: "123456")
+    job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee, scope: :user
+    visit company_path(company)
+    click_on "Candidaturas"
+    click_on candidate.full_name
+
+    expect(current_path).to eq(candidate_path(candidate))
+    expect(page).to have_content("Carlos Ferreira")
+    expect(page).to have_content("84394789374")
+    expect(page).to have_content("9999999")
+    expect(page).to have_content("Tenho 25 anos, formada em Economia")
+    expect(page).not_to have_link("Editar perfil")
+  end
+
   scenario "can not view applications from another company" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",

@@ -29,7 +29,7 @@
 
 <% if current_user&.company == @vacancy.company %>
   <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
-  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %> 
-  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %> 
-<% end %>
+  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %>
+  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %>
+<% end %><br>
 <%= link_to t("misc.back"), :back %>

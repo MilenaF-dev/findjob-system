@@ -20,10 +20,4 @@ class JobApplicationsController < ApplicationController
     flash[:notice] = t("job_applications.messages.created")
     redirect_to vacancy_path(vacancy)
   end
-
-  protected
-
-  def authenticate_user_or_candidate!
-    return redirect_to root_path, notice: t("job_applications.messages.must_be_signed") unless user_signed_in? || candidate_signed_in?
-  end
 end

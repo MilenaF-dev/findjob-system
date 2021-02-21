@@ -24,6 +24,7 @@
 
 <% if current_user&.company == @company %>
   <%= link_to t(".vacancy_registration"), new_vacancy_path %><br>
+  <%= link_to t(".job_applications"), job_applications_path %><br>
 <% end %>
 
 <h2><%= t(".company_vacancies") %></h2>
@@ -51,7 +52,5 @@
     <% end %>
     </dl>
 <% end %>
-
-<%= link_to "Candidaturas", job_applications_path unless current_user&.company != @company %>
 
 <%= link_to t("misc.back"), companies_path %>

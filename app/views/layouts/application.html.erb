@@ -14,11 +14,12 @@
     <nav>
       <% if user_signed_in? %>
         <%= current_user.email %>
+        <%= link_to t("misc.company_area"), company_path(current_user.company) %>
         <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete %>
       <% elsif candidate_signed_in? %>
         <%= current_candidate.email %>
-        <%= link_to "Minhas candidaturas", job_applications_path %>
-        <%= link_to "Editar perfil", edit_candidate_registration_path %>
+        <%= link_to t("misc.my_applications"), job_applications_path %>
+        <%= link_to t("misc.my_profile"), candidate_path(current_candidate) %>
         <%= link_to t("misc.exit"), destroy_candidate_session_path, method: :delete %>
       <% else %>
         <%= link_to t("misc.registration"), new_candidate_registration_path %>

@@ -7,7 +7,7 @@ feature "User sign up without a company" do
     within("div.links") do
       click_on "Registrar-se"
     end
-    
+
     within("form") do
       fill_in "E-mail", with: "milena@email.com"
       fill_in "Senha", with: "123456"
@@ -224,5 +224,21 @@ feature "User sign in" do
     click_on "Voltar"
 
     expect(current_path).to eq(root_path)
+  end
+end
+
+feature "User signed in visits company page" do
+  scenario "visit company page" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
+    user = User.create!(email: "milena@email.com", password: "123456", company: company)
+
+    login_as user, scope: :user
+    visit root_path
+    click_on "Área da empresa"
+
+    expect(current_path).to eq(company_path(company))
+    expect(page).to have_content(user.email)
   end
 end

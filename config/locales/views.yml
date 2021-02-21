@@ -13,6 +13,7 @@ pt-BR:
       disabled_vacancy: " (Vaga desabilitada)"
       deadline_exceeded: " (Vaga expirada)"
       no_vacancy_available: "Nenhuma vaga disponível"
+      job_applications: "Candidaturas"
     new:
       company_new: "Nova empresa"
     edit:
@@ -27,6 +28,7 @@ pt-BR:
       disable_vacancy: "Desabilitar vaga"
       enable_vacancy: "Habilitar vaga"
       disabled_title: "%{title} (Vaga desabilitada)"
+      vacancies_applications: "Candidaturas recebidas para esta vaga"
     new: 
       vacancy_new: "Nova vaga"
     edit:

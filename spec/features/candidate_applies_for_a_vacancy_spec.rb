@@ -133,7 +133,7 @@ feature "Candidate views his applications" do
     click_on "Minhas candidaturas"
 
     expect(current_path).to eq(job_applications_path)
-    expect(page).to have_content(vacancy.title)
+    expect(page).to have_link(vacancy.title)
     expect(page).to have_content(I18n.l(Date.today))
   end
 

@@ -10,13 +10,13 @@
   <dl>
     <% @job_applications.each do |application| %>
       <dt><%= Vacancy.model_name.human %></dt>
-      <dd><%= application.vacancy.title %></dd>
+      <dd><%= link_to application.vacancy.title, vacancy_path(application.vacancy) %></dd>
       <dt><%= t(".applied_date") %>
       <dd><%= l(application.created_at.to_date) %></dd>
 
       <% if user_signed_in? && current_user.company == application.vacancy.company %>
         <dt><%= Candidate.model_name.human %></dt>
-        <dd><%= application.candidate.full_name %></dd>
+        <dd><%= link_to application.candidate.full_name, candidate_path(application.candidate) %></dd>
         <dt><%= Candidate.human_attribute_name("email") %></dt>
         <dd><%= application.candidate.email %></dd>
         <dt><%= t(".status") %></dt>
