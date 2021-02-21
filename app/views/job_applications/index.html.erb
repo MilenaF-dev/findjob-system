@@ -1,15 +1,28 @@
-<h1><%= t(".my_applications", model: JobApplication.model_name.human(count: 2)) %></h1>
+<% if candidate_signed_in? %>
+  <h1><%= t(".my_applications", model: JobApplication.model_name.human(count: 2)) %></h1>
+<% else %>
+  <h1><%= JobApplication.model_name.human(count: 2) %></h1>
+<% end %>
 
 <% if @job_applications.empty? %>
   <div class="warning"><%= t(".no_application") %></div>
 <% else %>
   <dl>
     <% @job_applications.each do |application| %>
-          <dt><%= Vacancy.model_name.human(count: 1) %></dt>
-          <dd><%= application.vacancy.title %></dd>
-          <dt><%= t(".applied_date") %>
-          <dd><%= l(application.created_at.to_date) %></dd>
-          <hr>
+      <dt><%= Vacancy.model_name.human %></dt>
+      <dd><%= application.vacancy.title %></dd>
+      <dt><%= t(".applied_date") %>
+      <dd><%= l(application.created_at.to_date) %></dd>
+
+      <% if user_signed_in? && current_user.company == application.vacancy.company %>
+        <dt><%= Candidate.model_name.human %></dt>
+        <dd><%= application.candidate.full_name %></dd>
+        <dt><%= Candidate.human_attribute_name("email") %></dt>
+        <dd><%= application.candidate.email %></dd>
+        <dt><%= t(".status") %></dt>
+        <dd><%= "Pendente de avaliação" %></dd>
+      <% end %>
+      <hr>
     <% end %>
   </dl>
 <% end %>

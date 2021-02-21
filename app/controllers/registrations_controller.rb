@@ -1,6 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    byebug
     @user = User.new(sign_up_params)
 
     if @user.valid?

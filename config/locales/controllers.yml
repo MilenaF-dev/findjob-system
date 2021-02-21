@@ -3,3 +3,4 @@ pt-BR:
     messages: 
       created: Candidatura realizada com sucesso!
       already_created: "Você já se candidatou para esta vaga"
+      must_be_signed: "Precisa estar logado!"

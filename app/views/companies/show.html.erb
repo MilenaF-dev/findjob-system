@@ -52,4 +52,6 @@
     </dl>
 <% end %>
 
+<%= link_to "Candidaturas", job_applications_path unless current_user&.company != @company %>
+
 <%= link_to t("misc.back"), companies_path %>

@@ -31,7 +31,7 @@ feature "Candidate applies for a vacancy" do
     visit vacancy_path(vacancy)
     click_on "Aplicar para esta vaga"
 
-    expect(current_path).to eq new_candidate_session_path
+    expect(current_path).to eq(new_candidate_session_path)
   end
 
   scenario "successfully" do
@@ -97,31 +97,16 @@ end
 
 feature "Candidate views his applications" do
   scenario "must be signed in" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
-    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
-                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
-
     visit job_applications_path
 
-    expect(current_path).to eq new_candidate_session_path
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("Precisa estar logado!")
   end
 
   scenario "have link" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
-    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
-                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     candidate = Candidate.create!(full_name: "Carlos Ferreira", cpf: "84394789374", phone: "9999999",
                                   biography: "Tenho 25 anos, formada em Economia",
                                   email: "carlos@mail.com", password: "123456")
-    job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
 
     login_as candidate, scope: :candidate
     visit root_path

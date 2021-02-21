@@ -36,3 +36,4 @@ pt-BR:
       no_application: "Nenhuma candidatura"
       my_applications: "Minhas %{model}"
       applied_date: "Data da aplicação"
+      status: "Status"

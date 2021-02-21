@@ -1,8 +1,13 @@
 class JobApplicationsController < ApplicationController
-  before_action :authenticate_candidate!, only: [:index, :create]
+  before_action :authenticate_user_or_candidate!, only: [:index]
+  before_action :authenticate_candidate!, only: [:create]
 
   def index
-    @job_applications = current_candidate.job_applications.all
+    if candidate_signed_in?
+      @job_applications = current_candidate.job_applications
+    else
+      @job_applications = current_user.company.job_applications
+    end
   end
 
   def create
@@ -14,5 +19,11 @@ class JobApplicationsController < ApplicationController
 
     flash[:notice] = t("job_applications.messages.created")
     redirect_to vacancy_path(vacancy)
+  end
+
+  protected
+
+  def authenticate_user_or_candidate!
+    return redirect_to root_path, notice: t("job_applications.messages.must_be_signed") unless user_signed_in? || candidate_signed_in?
   end
 end
