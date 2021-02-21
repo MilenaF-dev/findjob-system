@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
     resources :job_applications, only: [:create]
   end
+
+  resources :job_applications, only: [:index]
 end

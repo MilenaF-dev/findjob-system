@@ -1,5 +1,9 @@
 class JobApplicationsController < ApplicationController
-  before_action :authenticate_candidate!, only: [:create]
+  before_action :authenticate_candidate!, only: [:index, :create]
+
+  def index
+    @job_applications = current_candidate.job_applications.all
+  end
 
   def create
     vacancy = Vacancy.find(params[:vacancy_id])

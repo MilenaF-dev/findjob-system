@@ -7,6 +7,9 @@ pt-BR:
       vacancy:
         one: "Vaga"
         other: "Vagas"
+      job_application:
+        one: "Candidatura"
+        other: Candidaturas
     attributes:
       company:
         name: "Nome"
@@ -25,3 +28,5 @@ pt-BR:
         mandatory_requirements: "Requisitos obrigatórios"
         deadline: "Data limite"
         total_vacancies: "Total de vagas"
+    
+      

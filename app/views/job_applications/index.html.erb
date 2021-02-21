@@ -1,0 +1,17 @@
+<h1><%= t(".my_applications", model: JobApplication.model_name.human(count: 2)) %></h1>
+
+<% if @job_applications.empty? %>
+  <div class="warning"><%= t(".no_application") %></div>
+<% else %>
+  <dl>
+    <% @job_applications.each do |application| %>
+          <dt><%= Vacancy.model_name.human(count: 1) %></dt>
+          <dd><%= application.vacancy.title %></dd>
+          <dt><%= t(".applied_date") %>
+          <dd><%= l(application.created_at.to_date) %></dd>
+          <hr>
+    <% end %>
+  </dl>
+<% end %>
+
+<%= link_to t("misc.back"), root_path %>
