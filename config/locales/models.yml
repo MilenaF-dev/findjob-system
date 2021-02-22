@@ -10,6 +10,9 @@ pt-BR:
       job_application:
         one: "Candidatura"
         other: Candidaturas
+      feedback:
+        one: "Feedback"
+        other: "Feedbacks"
     attributes:
       company:
         name: "Nome"
@@ -28,5 +31,9 @@ pt-BR:
         mandatory_requirements: "Requisitos obrigatórios"
         deadline: "Data limite"
         total_vacancies: "Total de vagas"
-    
+      feedback:
+        reason: "Motivo"
+        salary_proposal: "Proposta salarial"
+        start_date: "Data de início"
+        accepted: "Aceito"
       

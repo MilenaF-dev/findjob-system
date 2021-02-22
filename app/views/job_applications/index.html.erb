@@ -19,8 +19,17 @@
         <dd><%= link_to application.candidate.full_name, candidate_path(application.candidate) %></dd>
         <dt><%= Candidate.human_attribute_name("email") %></dt>
         <dd><%= application.candidate.email %></dd>
+
         <dt><%= t(".status") %></dt>
-        <dd><%= "Pendente de avaliação" %></dd>
+        <% if !application.reviewed? %>
+          <dd><%= t(".pending_evaluation") %></dd><br>
+          <%= link_to "Recusar", new_job_application_feedback_path(application, accept: false) %>
+          <%= link_to "Enviar proposta", new_job_application_feedback_path(application, accept: true) %>  
+        <% elsif application.accepted? %>
+          <dd><%= t(".proposal_sent") %></dd>
+        <% else %>
+          <dd><%= t(".declined") %></dd>
+        <% end %>
       <% end %>
       <hr>
     <% end %>

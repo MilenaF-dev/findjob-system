@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     post "disable", on: :member
     post "enable", on: :member
 
-    resources :job_applications, only: [:create]
+    resources :job_applications, only: [:create], shallow: true do
+      resources :feedbacks, only: [:index, :new, :create]
+    end
   end
 
   resources :job_applications, only: [:index]

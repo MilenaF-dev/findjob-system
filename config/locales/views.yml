@@ -39,3 +39,9 @@ pt-BR:
       my_applications: "Minhas %{model}"
       applied_date: "Data da aplicação"
       status: "Status"
+      declined: "Recusada"
+      proposal_sent: "Proposta enviada"
+      pending_evaluation: "Pendente de avaliação"
+  feedbacks:
+    new:
+      send_feedback: "Enviar feedback"

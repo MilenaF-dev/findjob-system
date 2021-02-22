@@ -14,8 +14,8 @@
 - [X] Visitante navega pelo site e vê as empresas cadastradas;
 - [X] Visitante decide se inscrever para uma vaga;
 - [X] Visitante cria sua conta e preenche um perfil para confirmar sua candidatura;
-- [ ] Colaborador da empresa visualiza as candidaturas recebidas;
-- [ ] Colaborador da empresa faz uma proposta para um candidato;
+- [X] Colaborador da empresa visualiza as candidaturas recebidas;
+- [X] Colaborador da empresa faz uma proposta para um candidato;
 - [ ] Candidato (agora autenticado) visualiza as propostas recebidas;
 - [ ] Colaborador ou candidato podem aceitar/reprovar uma candidatura.
 - [ ] Visitante realiza buscas de empresas e/ou vagas;
