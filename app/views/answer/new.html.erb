@@ -1,0 +1,28 @@
+<% if @answer.errors.any? %>
+  <% @answer.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+
+
+<%= form_with model: @answer, url: feedback_answer_index_path(@feedback) do |form| %>
+
+  <%= form.hidden_field :accepted, value: @accept %>
+
+  <% if @accept %>
+    <div>
+      <%= form.label :start_date %><br>
+      <%= form.date_field :start_date %>
+    </div>
+
+  <% else %>
+    <div>
+      <%= form.label :reason %><br>
+      <%= form.text_area :reason %>
+    </div>
+  <% end %><br>
+
+  <div>
+    <%= form.submit t(".send_answer") %>
+  </div>
+<% end %><br>

@@ -21,6 +21,7 @@ pt-BR:
   vacancies:
     index:
       no_vacancy_available: "Nenhuma vaga disponível"
+      already_applied: "(Já aplicou para esta vaga)"
     show:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"
@@ -42,6 +43,16 @@ pt-BR:
       declined: "Recusada"
       proposal_sent: "Proposta enviada"
       pending_evaluation: "Pendente de avaliação"
+      send_proposal: "Enviar proposta"
+      refuse: "Recusar"
+      company_answer: "Resposta da empresa"
+      accept_proposal: "Aceitar proposta"
+      decline_proposal: "Recusar proposta"
+      proposal_accepted: "Parabéns! Você aceitou essa proposta!"
+      proposal_declined: "Você recusou essa proposta!"
   feedbacks:
     new:
       send_feedback: "Enviar feedback"
+  answer:
+    new:
+      send_answer: "Enviar resposta"

@@ -6,7 +6,9 @@
     <dl>
     <% @vacancies.each do |vacancy| %>
       <dt><%= Vacancy.human_attribute_name("title") %></dt>
-      <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
+        <dd><%= link_to vacancy.title, vacancy_path(vacancy) %>
+        <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %></dd>
+      
       <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
       <dd><%= vacancy.nivel %></dd>
       <dt><%= Company.model_name.human %></dt>

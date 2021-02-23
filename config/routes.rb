@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     post "enable", on: :member
 
     resources :job_applications, only: [:create], shallow: true do
-      resources :feedbacks, only: [:index, :new, :create]
+      resources :feedbacks, only: [:index, :new, :create], shallow: true do
+        resources :answer, only: [:index, :new, :create]
+      end
     end
   end
 

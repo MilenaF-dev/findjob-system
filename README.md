@@ -16,8 +16,8 @@
 - [X] Visitante cria sua conta e preenche um perfil para confirmar sua candidatura;
 - [X] Colaborador da empresa visualiza as candidaturas recebidas;
 - [X] Colaborador da empresa faz uma proposta para um candidato;
-- [ ] Candidato (agora autenticado) visualiza as propostas recebidas;
-- [ ] Colaborador ou candidato podem aceitar/reprovar uma candidatura.
+- [X] Candidato (agora autenticado) visualiza as propostas recebidas;
+- [X] Colaborador ou candidato podem aceitar/reprovar uma candidatura.
 - [ ] Visitante realiza buscas de empresas e/ou vagas;
 
 #### Como rodar a aplicação :arrow_forward: 

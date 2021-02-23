@@ -8,24 +8,43 @@
   <div class="warning"><%= t(".no_application") %></div>
 <% else %>
   <dl>
-    <% @job_applications.each do |application| %>
+    <% @job_applications.each do |job_application| %>
       <dt><%= Vacancy.model_name.human %></dt>
-      <dd><%= link_to application.vacancy.title, vacancy_path(application.vacancy) %></dd>
+      <dd><%= link_to job_application.vacancy.title, vacancy_path(job_application.vacancy) %></dd>
       <dt><%= t(".applied_date") %>
-      <dd><%= l(application.created_at.to_date) %></dd>
+      <dd><%= l(job_application.created_at.to_date) %></dd><br>
 
-      <% if user_signed_in? && current_user.company == application.vacancy.company %>
+      <% if candidate_signed_in? && current_candidate == job_application.candidate && job_application.feedback.present? %>
+        <dt><%= t(".company_answer") %></dt>
+        <dd><%= job_application.feedback.reason %></dd>
+
+        <% if job_application.feedback.accepted? %>
+          <dd><%= "#{Feedback.human_attribute_name("salary_proposal")}:  #{job_application.feedback.salary_proposal}" %></dt>
+          <dd><%= "#{Feedback.human_attribute_name("start_date")}:  #{l(job_application.feedback.start_date)}" %></dd><br>
+
+          <% if !job_application.feedback.answer.present? %>
+            <dd><%= link_to t(".accept_proposal"), new_feedback_answer_path(job_application.feedback, accept: true) %></dd>
+            <dd><%= link_to t(".decline_proposal"), new_feedback_answer_path(job_application.feedback, accept: false) %></dd>
+          <% elsif job_application.feedback.answer.accepted? %>
+          <dd><%= t(".proposal_accepted") %>
+          <% else %>
+            <dd><%= t(".proposal_declined") %></dd>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if user_signed_in? && current_user.company == job_application.vacancy.company %>
         <dt><%= Candidate.model_name.human %></dt>
-        <dd><%= link_to application.candidate.full_name, candidate_path(application.candidate) %></dd>
+        <dd><%= link_to job_application.candidate.full_name, candidate_path(job_application.candidate) %></dd>
         <dt><%= Candidate.human_attribute_name("email") %></dt>
-        <dd><%= application.candidate.email %></dd>
+        <dd><%= job_application.candidate.email %></dd>
 
         <dt><%= t(".status") %></dt>
-        <% if !application.reviewed? %>
+        <% if !job_application.reviewed? %>
           <dd><%= t(".pending_evaluation") %></dd><br>
-          <%= link_to "Recusar", new_job_application_feedback_path(application, accept: false) %>
-          <%= link_to "Enviar proposta", new_job_application_feedback_path(application, accept: true) %>  
-        <% elsif application.accepted? %>
+          <%= link_to t(".refuse"), new_job_application_feedback_path(job_application, accept: false) %>
+          <%= link_to t(".send_proposal"), new_job_application_feedback_path(job_application, accept: true) %>  
+        <% elsif job_application.accepted? %>
           <dd><%= t(".proposal_sent") %></dd>
         <% else %>
           <dd><%= t(".declined") %></dd>
