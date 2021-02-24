@@ -363,7 +363,8 @@ feature "Candidate replies the company's proposal" do
                                   biography: "Tenho 25 anos, formada em Economia",
                                   email: "carlos@mail.com", password: "123456")
     job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
-    feedback = Feedback.create!(reason: "Perfil não se enquadra no perfil da empresa", job_application: job_application, accepted: false)
+    feedback = Feedback.create!(reason: "Gostamos muito do seu perfil", salary_proposal: "2500",
+                                start_date: "22/03/2021", job_application: job_application, accepted: true)
     answer = Feedback.create!(reason: "Salário oferecido abaixo do mercado", feedback: feedback,
                               job_application: job_application, accepted: false)
 

@@ -46,6 +46,17 @@
           <%= link_to t(".send_proposal"), new_job_application_feedback_path(job_application, accept: true) %>  
         <% elsif job_application.accepted? %>
           <dd><%= t(".proposal_sent") %></dd>
+
+          <% if job_application.feedback.answer.present? %>
+            <%= t(".candidate_answer") %>
+            <% if job_application.feedback.answer.accepted? %>
+              <dd><%= t(".candidate_accepted") %></dd>
+              <dd><%= "#{Feedback.human_attribute_name("start_date")}: #{l(job_application.feedback.answer.start_date)}" %></dd>
+            <% else %>
+              <dd><%= t(".candidate_declined") %></dd>
+              <dd><%= "#{Feedback.human_attribute_name("reason")}: #{job_application.feedback.answer.reason}" %></dd>
+            <% end %>
+          <% end %>
         <% else %>
           <dd><%= t(".declined") %></dd>
         <% end %>

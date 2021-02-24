@@ -41,4 +41,44 @@
   <% end %>
 <% end %><br>
 
+
+<% if current_user&.company == @vacancy.company %> 
+  <h3>Candidaturas recebidas para esta vaga</h3>
+  <% if @vacancy.job_applications.empty? %>
+    <div class="warning"><%= t(".no_application") %></div>
+  <% else %>
+  <dl>
+    <% @vacancy.job_applications.each do |job_application| %>
+      <dt><%= Candidate.model_name.human %></dt>
+      <dd><%= link_to job_application.candidate.full_name, candidate_path(job_application.candidate) %></dd>
+      <dt><%= Candidate.human_attribute_name("email") %></dt>
+      <dd><%= job_application.candidate.email %></dd>
+      <dt><%= t(".applied_date") %>
+      <dd><%= l(job_application.created_at.to_date) %></dd>
+      <dt><%= t(".status") %></dt>
+      <% if !job_application.reviewed? %>
+        <dd><%= t(".pending_evaluation") %></dd><br>
+        <%= link_to t(".refuse"), new_job_application_feedback_path(job_application, accept: false) %>
+        <%= link_to t(".send_proposal"), new_job_application_feedback_path(job_application, accept: true) %>  
+      <% elsif job_application.accepted? %>
+        <dd><%= t(".proposal_sent") %></dd>
+
+        <% if job_application.feedback.answer.present? %>
+            <%= t(".candidate_answer") %>
+          <% if job_application.feedback.answer.accepted? %>
+            <dd><%= t(".proposal_accepted") %></dd>
+            <dd><%= "#{Feedback.human_attribute_name("start_date")}: #{l(job_application.feedback.answer.start_date)}" %></dd>
+          <% else %>
+              <dd><%= t(".proposal_declined") %></dd>
+              <dd><%= "#{Feedback.human_attribute_name("reason")}: #{job_application.feedback.answer.reason}" %></dd>
+          <% end %>
+        <% end %>
+      <% else %>
+        <dd><%= t(".declined") %></dd>
+      <% end %>
+    <% end %>
+    <hr>
+  <% end %>
+<% end %>
+    
 <%= link_to t("misc.back"), :back %>

@@ -34,6 +34,7 @@ pt-BR:
     show:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"
+      applied_date: "Data da aplicação"
       edit: "Editar"
       disable_vacancy: "Desabilitar vaga"
       enable_vacancy: "Habilitar vaga"
@@ -41,6 +42,17 @@ pt-BR:
       deadline_exceeded: "%{title} (Vaga expirada)"
       vacancies_applications: "Candidaturas recebidas para esta vaga"
       message_vacancy_filled: "Vaga foi desabilitada automaticamente porque já foi preenchida"
+      no_application: "Nenhuma candidatura"
+      applied_date: "Data da aplicação"
+      status: "Status"
+      declined: "Recusada"
+      proposal_sent: "Proposta enviada"
+      pending_evaluation: "Pendente de avaliação"
+      send_proposal: "Enviar proposta"
+      refuse: "Recusar"
+      proposal_accepted: "Proposta aceita"
+      proposal_declined: "Proposta recusada"
+      candidate_answer: "Resposta do candidato"
     new: 
       vacancy_new: "Nova vaga"
     edit:
@@ -61,6 +73,9 @@ pt-BR:
       decline_proposal: "Recusar proposta"
       proposal_accepted: "Parabéns! Você aceitou essa proposta!"
       proposal_declined: "Você recusou essa proposta!"
+      candidate_answer: "Resposta do candidato"
+      candidate_accepted: "Proposta aceita"
+      candidate_declined: "Proposta recusada"
   feedbacks:
     new:
       send_feedback: "Enviar feedback"
