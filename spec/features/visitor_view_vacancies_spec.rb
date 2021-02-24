@@ -195,3 +195,81 @@ feature "Visitor view available vacancies" do
     expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
   end
 end
+
+feature "Visitor search for vacancies" do
+  scenario "for vacancies title" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                    min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                    mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+    Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
+                    deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enabled)
+    Vacancy.create!(title: "Techlead", description: "Vaga para atuar como líder técnico",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 8 anos",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+
+    visit root_path
+    click_on "Vagas disponíveis"
+    fill_in "Pesquise por vagas", with: "Dev"
+    click_on "Pesquisar"
+
+    expect(current_path).to eq(vacancies_path)
+    expect(page).to have_link("Dev Júnior")
+    expect(page).to have_content("Júnior")
+    expect(page).to have_link("Dev Sênior")
+    expect(page).to have_content("Sênior")
+    expect(page).not_to have_link("Techlead")
+  end
+
+  scenario "search for vacancies nivel" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                    min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                    mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+    Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
+                    deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enabled)
+    Vacancy.create!(title: "Techlead", description: "Vaga para atuar como líder técnico",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 8 anos",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+
+    visit vacancies_path
+    fill_in "Pesquise por vagas", with: "Sênior"
+    click_on "Pesquisar"
+
+    expect(current_path).to eq(vacancies_path)
+    expect(page).to have_link("Techlead")
+    expect(page).to have_content("Sênior")
+    expect(page).to have_link("Dev Sênior")
+    expect(page).not_to have_link("Dev Júnior")
+    expect(page).not_to have_content("Júnior")
+  end
+
+  scenario "no results found" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    Vacancy.create!(title: "Techlead", description: "Vaga para atuar como líder técnico",
+                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 8 anos",
+                    deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
+
+    visit vacancies_path
+    fill_in "Pesquise por vagas", with: "Dev"
+    click_on "Pesquisar"
+
+    expect(current_path).to eq(vacancies_path)
+    expect(page).to have_content("Nenhuma vaga disponível")
+  end
+end

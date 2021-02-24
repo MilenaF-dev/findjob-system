@@ -1,0 +1,35 @@
+<h1>Resultados da busca</h1>
+
+<% if @vacancies.any? %>
+  <h3><%= "Vagas disponíveis" %></h3>
+    <% @vacancies.each do |vacancy| %>
+        <p>
+          <%= "#{Vacancy.human_attribute_name("title")}:" %>
+          <%= link_to vacancy.title, vacancy_path(vacancy) %>
+          <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %>
+        </p>
+        <p>
+          <%= "#{Vacancy.human_attribute_name("nivel")}:" %>
+          <%= vacancy.nivel %>
+        </p>
+    <hr>
+    <% end %>
+
+<% elsif @companies.any? %>
+  <h3><%= "Empresas" %></h3>
+    <% @companies.each do |company| %>
+      <p>
+        <%= "#{Company.human_attribute_name("name")}:" %>
+        <%= link_to company.name, company_path(company) %>
+      </p>
+      <p>
+        <%= "#{Company.human_attribute_name("description")}:" %>
+        <%= company.description %>
+      </p>
+      <hr>
+    <% end %>
+<% else %>
+  <%= "Nenhum resultado encontrado" %><br>
+<% end %>
+
+<%= link_to t("misc.back"), root_path %>

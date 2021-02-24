@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   def index
     @companies = Company.all
+    @companies = @companies.where("name like ?", "%#{params[:search]}%") if params[:search].present?
   end
 
   def show

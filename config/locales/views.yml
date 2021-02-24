@@ -1,10 +1,17 @@
 pt-BR:
   home:
     index:
+      title: "FindJob"
+      welcome_message: "Bem vindo ao sistema de ofertas de vagas"
+      placeholder_text: "Pesquise por vagas e empresas" 
+      search: "Pesquisar"
       available_vacancies: "Vagas disponíveis"
   companies:
     index:
       company_registration: "Registrar empresa"
+      placeholder_text: "Pesquise por empresas"
+      search: "Pesquisar"
+      no_registered_company: "Nenhuma empresa cadastrada"
     show:
       edit: "Editar"
       delete: "Apagar"
@@ -22,6 +29,8 @@ pt-BR:
     index:
       no_vacancy_available: "Nenhuma vaga disponível"
       already_applied: "(Já aplicou para esta vaga)"
+      placeholder_text: "Pesquise por vagas"
+      search: "Pesquisar"
     show:
       salary: "De %{begin} até %{end}"
       salary_range: "Faixa salarial"

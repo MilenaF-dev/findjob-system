@@ -1,7 +1,13 @@
 <h1><%= Company.model_name.human(count: 2) %></h1>
 
+<%= form_with url: companies_path, method: :get do %>
+  <%= label_tag :search, "" %>
+  <%= text_field_tag :search, "", placeholder: t(".placeholder_text") %>
+  <%= submit_tag t(".search") %>
+<% end %>
+
 <% if @companies.empty? %>
-  <div class="warning">Nenhuma empresa cadastrada</div>
+  <div class="warning"><%= t(".no_registered_company") %></div>
 <% else %>
   <dl>
     <% @companies.each do |company| %>

@@ -1,5 +1,11 @@
 <h1><%= Vacancy.model_name.human(count: 2) %></h1>
 
+<%= form_with url: vacancies_path, method: :get do %>
+  <%= label_tag :search, "" %>
+  <%= text_field_tag :search, "", placeholder: t(".placeholder_text") %>
+  <%= submit_tag t(".search") %>
+<% end %>
+
 <% if @vacancies.empty? %>
   <div class="warning"><%= t(".no_vacancy_available") %></div>
 <% else %>

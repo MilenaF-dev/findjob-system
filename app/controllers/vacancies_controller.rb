@@ -3,6 +3,8 @@ class VacanciesController < ApplicationController
 
   def index
     @vacancies = Vacancy.enabled.future
+    @vacancies = @vacancies.where("title like ? OR nivel like ?",
+                                  "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
   end
 
   def show

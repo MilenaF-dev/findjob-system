@@ -1,5 +1,12 @@
-<h1>FindJob</h1>
-<h2>Bem vindo ao sistema de ofertas de vagas</h2>
+<h1><%= t(".title") %></h1>
+<h2><%= t(".welcome_message") %></h2>
+
+
+<%= form_with url: search_path, method: :get do %>
+  <%= label_tag :search, "" %>
+  <%= text_field_tag :search, "", placeholder: t(".placeholder_text") %>
+  <%= submit_tag t(".search") %>
+<% end %>
 
 
 <%= link_to Company.model_name.human(count: 2), companies_path %>

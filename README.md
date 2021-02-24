@@ -18,7 +18,7 @@
 - [X] Colaborador da empresa faz uma proposta para um candidato;
 - [X] Candidato (agora autenticado) visualiza as propostas recebidas;
 - [X] Colaborador ou candidato podem aceitar/reprovar uma candidatura.
-- [ ] Visitante realiza buscas de empresas e/ou vagas;
+- [X] Visitante realiza buscas de empresas e/ou vagas;
 
 #### Como rodar a aplicação :arrow_forward: 
 <p align="justify">Para executar esse projeto você deve ter instalado em seu computador, preferencialmente com algum sistema operacionais Unix, a linguagem de programação Ruby na versão 2.7.1 e Rails na versão 6.1.2. Além disso, você vai precisar ter instalado outros pré-requisitos, como: </p>
