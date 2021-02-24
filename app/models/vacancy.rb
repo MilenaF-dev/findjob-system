@@ -8,4 +8,12 @@ class Vacancy < ApplicationRecord
   validates :title, :nivel, :mandatory_requirements, :deadline, :total_vacancies, presence: true
 
   scope :future, -> { where("deadline >= ?", Date.current) }
+
+  def filled?
+    job_applications.approved.size >= total_vacancies
+  end
+
+  def update_filled!
+    update!(status: :disabled) if filled?
+  end
 end

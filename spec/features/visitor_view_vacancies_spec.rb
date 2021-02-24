@@ -193,6 +193,7 @@ feature "Visitor view available vacancies" do
     expect(current_path).to eq(company_path(company))
     expect(page).to have_content("Dev Júnior (Vaga expirada")
     expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
+    expect(page).not_to have_link("Desabilitar vaga")
   end
 end
 
@@ -271,5 +272,81 @@ feature "Visitor search for vacancies" do
 
     expect(current_path).to eq(vacancies_path)
     expect(page).to have_content("Nenhuma vaga disponível")
+  end
+end
+
+feature "Vacancy that was filled is not available" do
+  scenario "vacancy is disabled if it was filled" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: "1", company: company, status: :enabled)
+    candidate = Candidate.create!(full_name: "Carlos Ferreira", cpf: "84394789374", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "carlos@mail.com", password: "123456")
+    job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
+    feedback = Feedback.create!(reason: "Gostamos muito do seu perfil", salary_proposal: "2500",
+                                start_date: "22/03/2021", job_application: job_application, accepted: true)
+    answer = Feedback.create!(start_date: "22/03/2021", feedback: feedback,
+                              job_application: job_application, accepted: true)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee, scope: :user
+    visit company_path(company)
+    click_on vacancy.title
+
+    expect(page).to have_content("Dev Júnior (Vaga desabilitada)")
+    expect(page).to have_content("Vaga foi desabilitada automaticamente porque já foi preenchida")
+  end
+
+  scenario "visitor can not see vacancy filled" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: "1", company: company, status: :enabled)
+    candidate = Candidate.create!(full_name: "Carlos Ferreira", cpf: "84394789374", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "carlos@mail.com", password: "123456")
+    job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
+    feedback = Feedback.create!(reason: "Gostamos muito do seu perfil", salary_proposal: "2500",
+                                start_date: "22/03/2021", job_application: job_application, accepted: true)
+    answer = Feedback.create!(start_date: "22/03/2021", feedback: feedback,
+                              job_application: job_application, accepted: true)
+
+    visit root_path
+    click_on "Vagas disponíveis"
+
+    expect(page).not_to have_content("Dev Júnior")
+  end
+
+  scenario "and only employees can see vacancies filled" do
+    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
+                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
+                              min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
+                              deadline: "22/10/2021", total_vacancies: "1", company: company, status: :enabled)
+    candidate = Candidate.create!(full_name: "Carlos Ferreira", cpf: "84394789374", phone: "9999999",
+                                  biography: "Tenho 25 anos, formada em Economia",
+                                  email: "carlos@mail.com", password: "123456")
+    job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
+    feedback = Feedback.create!(reason: "Gostamos muito do seu perfil", salary_proposal: "2500",
+                                start_date: "22/03/2021", job_application: job_application, accepted: true)
+    answer = Feedback.create!(start_date: "22/03/2021", feedback: feedback,
+                              job_application: job_application, accepted: true)
+    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
+
+    login_as employee
+    visit company_path(company)
+
+    expect(page).to have_content("Dev Júnior (Vaga desabilitada)")
+    expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
   end
 end

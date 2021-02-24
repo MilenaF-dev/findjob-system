@@ -38,7 +38,9 @@ pt-BR:
       disable_vacancy: "Desabilitar vaga"
       enable_vacancy: "Habilitar vaga"
       disabled_title: "%{title} (Vaga desabilitada)"
+      deadline_exceeded: "%{title} (Vaga expirada)"
       vacancies_applications: "Candidaturas recebidas para esta vaga"
+      message_vacancy_filled: "Vaga foi desabilitada automaticamente porque já foi preenchida"
     new: 
       vacancy_new: "Nova vaga"
     edit:

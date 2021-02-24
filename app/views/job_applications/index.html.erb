@@ -26,7 +26,7 @@
             <dd><%= link_to t(".accept_proposal"), new_feedback_answer_path(job_application.feedback, accept: true) %></dd>
             <dd><%= link_to t(".decline_proposal"), new_feedback_answer_path(job_application.feedback, accept: false) %></dd>
           <% elsif job_application.feedback.answer.accepted? %>
-          <dd><%= t(".proposal_accepted") %>
+          <dd><%= t(".proposal_accepted") %></dd>
           <% else %>
             <dd><%= t(".proposal_declined") %></dd>
           <% end %>

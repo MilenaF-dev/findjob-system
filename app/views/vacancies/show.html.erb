@@ -1,5 +1,10 @@
   <% if @vacancy.disabled? %>
     <h1><%= t(".disabled_title", title: @vacancy.title) %></h1>
+    <% if @vacancy.filled? && current_user&.company == @vacancy.company %>
+      <%= t(".message_vacancy_filled") %>
+    <% end %>
+  <% elsif @vacancy.deadline.past? %>
+    <h1><%= t(".deadline_exceeded", title: @vacancy.title) %></h1>
   <% else %>
     <h1><%= @vacancy.title %></h1>
   <% end %>
@@ -29,7 +34,11 @@
 
 <% if current_user&.company == @vacancy.company %>
   <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
-  <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %>
-  <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %>
+
+  <% if !@vacancy.deadline.past? %>
+    <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %>
+    <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %>
+  <% end %>
 <% end %><br>
+
 <%= link_to t("misc.back"), :back %>
