@@ -1,0 +1,11 @@
+<h1>Olá, <%= @candidate.full_name %></h1>
+    <p>
+      Você acabou de aplicar para a vaga <%= @vacancy.title %> da empresa <%= @company.name %> pelo FindJob!
+    </p>
+    <p>
+      Para acompanhar suas candidaturas, 
+      <a href="<%= job_applications_url %>">clique aqui</a>.
+    </p>
+    <p>Obrigado por usar o FindJob e boa sorte!</p>
+
+  

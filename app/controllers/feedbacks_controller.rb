@@ -12,6 +12,7 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new(feedback_params.merge(job_application: job_application))
 
     if @feedback.save
+      NotificationsMailer.feedback_email(@feedback).deliver_later
       redirect_to job_applications_path
     else
       @accept = @feedback.accepted?

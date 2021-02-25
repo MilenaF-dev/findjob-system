@@ -16,6 +16,7 @@ class JobApplicationsController < ApplicationController
     return flash[:notice] = t("job_applications.messages.already_created") if vacancy.candidates.include?(current_candidate)
 
     JobApplication.create(vacancy: vacancy, candidate: current_candidate)
+    NotificationsMailer.job_application_email(current_candidate, vacancy, vacancy.company).deliver_later
 
     flash[:notice] = t("job_applications.messages.created")
     redirect_to vacancy_path(vacancy)

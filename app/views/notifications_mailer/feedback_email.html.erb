@@ -1,0 +1,23 @@
+<h1>Olá, <%= @candidate.full_name %></h1>
+
+<% if @feedback.accepted? %>
+  <p>
+    Parabéns! Você foi aprovado no processo seletivo da vaga <%= @vacancy.title %> da empresa <%= @company.name %>!
+  </p>
+  <p>
+    Para visualizar e responder a proposta feita pela empresa, 
+    <a href="<%= job_applications_url %>">clique aqui</a>.
+  </p>
+  <p>Obrigado por usar o FindJob!</p>
+<% else %>
+  <p>
+    Infelizmente, você não foi aprovado no processo seletivo da vaga <%= @vacancy.title %> da empresa <%= @company.name %>, mas
+    não desista! Continue aplicando para as <a href="<%= vacancies_url %>">vagas disponíveis</a> no FindJob.
+  </p>
+  <p>
+    Para visualizar o feedback da empresa, 
+    <a href="<%= job_applications_url %>">clique aqui</a>.
+  </p>
+  <p>Obrigado por usar o FindJob!</p>
+<% end %>
+  
