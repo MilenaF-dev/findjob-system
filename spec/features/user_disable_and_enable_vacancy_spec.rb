@@ -6,7 +6,7 @@ feature "User disable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
@@ -28,7 +28,7 @@ feature "User disable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
@@ -45,7 +45,7 @@ feature "User disable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
 
@@ -61,7 +61,7 @@ feature "User enable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
@@ -83,7 +83,7 @@ feature "User enable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
@@ -100,7 +100,7 @@ feature "User enable vacancy" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              nivel: "Júnior", min_salary: 1500, max_salary: 3000,
+                              level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                               deadline: "22/10/2021", total_vacancies: 3, company: company, status: :disabled)
 

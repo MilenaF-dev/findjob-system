@@ -16,7 +16,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
 
     let(:vacancy) do
       Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                      min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                      min_salary: 1500, max_salary: 3000, level: "Júnior",
                       mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                       deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     end
@@ -63,7 +63,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
 
     let(:vacancy) do
       Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                      min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                      min_salary: 1500, max_salary: 3000, level: "Júnior",
                       mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                       deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     end

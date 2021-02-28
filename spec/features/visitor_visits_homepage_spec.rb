@@ -15,15 +15,15 @@ feature "Visitor search for vacancies and companies" do
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                    min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                    min_salary: 1500, max_salary: 3000, level: "Júnior",
                     mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                     deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
-                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    min_salary: 8000, max_salary: 12000, level: "Sênior",
                     mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
                     deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enabled)
     Vacancy.create!(title: "Techlead", description: "Vaga para atuar como líder técnico",
-                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    min_salary: 8000, max_salary: 12000, level: "Sênior",
                     mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 8 anos",
                     deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
 
@@ -39,20 +39,20 @@ feature "Visitor search for vacancies and companies" do
     expect(page).not_to have_link("Techlead")
   end
 
-  scenario "search for vacancies nivel" do
+  scenario "search for vacancies level" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                               cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
     Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                    min_salary: 1500, max_salary: 3000, nivel: "Júnior",
+                    min_salary: 1500, max_salary: 3000, level: "Júnior",
                     mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                     deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     Vacancy.create!(title: "Dev Sênior", description: "Vaga de desenvolvidor sênior Ruby on Rails",
-                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    min_salary: 8000, max_salary: 12000, level: "Sênior",
                     mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 5 anos",
                     deadline: "22/10/2021", total_vacancies: "2", company: company, status: :enabled)
     Vacancy.create!(title: "Techlead", description: "Vaga para atuar como líder técnico",
-                    min_salary: 8000, max_salary: 12000, nivel: "Sênior",
+                    min_salary: 8000, max_salary: 12000, level: "Sênior",
                     mandatory_requirements: "Sólido conhecimentos em Ruby, Rails e SQLite, experiência de 8 anos",
                     deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
 

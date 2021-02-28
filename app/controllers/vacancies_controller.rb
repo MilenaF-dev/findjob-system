@@ -3,7 +3,7 @@ class VacanciesController < ApplicationController
 
   def index
     @vacancies = Vacancy.enabled.future
-    @vacancies = @vacancies.where("title like ? OR nivel like ?",
+    @vacancies = @vacancies.where("title like ? OR level like ?",
                                   "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
   end
 
@@ -67,7 +67,7 @@ class VacanciesController < ApplicationController
   end
 
   def vacancy_params
-    params.require(:vacancy).permit(:title, :nivel, :description, :min_salary, :max_salary, :mandatory_requirements, :deadline, :total_vacancies, :company_id)
+    params.require(:vacancy).permit(:title, :level, :description, :min_salary, :max_salary, :mandatory_requirements, :deadline, :total_vacancies, :company_id)
   end
 
   def authorize_employee

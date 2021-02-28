@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    @vacancies = Vacancy.where("title like ? OR nivel like ?",
+    @vacancies = Vacancy.where("title like ? OR level like ?",
                                "%#{params[:search]}%", "%#{params[:search]}%")
 
     @companies = Company.where("name like ?", "%#{params[:search]}%")

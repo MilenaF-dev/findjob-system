@@ -15,8 +15,8 @@
         <dd><%= link_to vacancy.title, vacancy_path(vacancy) %>
         <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %></dd>
       
-      <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
-      <dd><%= vacancy.nivel %></dd>
+      <dt><%= Vacancy.human_attribute_name("level") %></dt>
+      <dd><%= vacancy.level %></dd>
       <dt><%= Company.model_name.human %></dt>
       <dd><%= vacancy.company.name %></dd>
       <hr>

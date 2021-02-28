@@ -16,7 +16,7 @@ describe Company do
       company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                                 address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
                                 cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "")
-      vacancy = Vacancy.new(title: "Dev Júnior", nivel: "Júnior",
+      vacancy = Vacancy.new(title: "Dev Júnior", level: "Júnior",
                             mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
                             deadline: "22/10/2021", total_vacancies: "3", company: company)
 
@@ -32,7 +32,7 @@ describe Company do
       vacancy.valid?
 
       expect(vacancy.errors[:title]).to include("não pode ficar em branco")
-      expect(vacancy.errors[:nivel]).to include("não pode ficar em branco")
+      expect(vacancy.errors[:level]).to include("não pode ficar em branco")
       expect(vacancy.errors[:mandatory_requirements]).to include("não pode ficar em " \
                                                          "branco")
       expect(vacancy.errors[:deadline]).to include("não pode ficar em" \

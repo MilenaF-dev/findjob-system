@@ -25,7 +25,7 @@ pt-BR:
       vacancy:
         title: "Título"
         description: "Descrição"
-        nivel: "Nível"
+        level: "Nível"
         min_salary: "De"
         max_salary: "Até"
         mandatory_requirements: "Requisitos obrigatórios"

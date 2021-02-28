@@ -9,8 +9,8 @@
           <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %>
         </p>
         <p>
-          <%= "#{Vacancy.human_attribute_name("nivel")}:" %>
-          <%= vacancy.nivel %>
+          <%= "#{Vacancy.human_attribute_name("level")}:" %>
+          <%= vacancy.level %>
         </p>
     <hr>
     <% end %>

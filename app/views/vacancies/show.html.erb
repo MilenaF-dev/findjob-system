@@ -14,8 +14,8 @@
   <dd><%= @vacancy.company.name %></dd>
   <dt><%= Vacancy.human_attribute_name("description") %></dt>
   <dd><%= @vacancy.description %></dd>
-  <dt><%= Vacancy.human_attribute_name("nivel") %></dt>
-  <dd><%= @vacancy.nivel %></dd>
+  <dt><%= Vacancy.human_attribute_name("level") %></dt>
+  <dd><%= @vacancy.level %></dd>
   <dt><%= t(".salary_range") %></dt>
   <dd><%= t(".salary", begin: number_to_currency(@vacancy.min_salary), end: number_to_currency(@vacancy.max_salary)) %></dd>
   <dt><%= Vacancy.human_attribute_name("mandatory_requirements") %></dt>
