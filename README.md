@@ -35,13 +35,15 @@
 
 <p>Execute o seguinte comando:</p>
 
-> $ bundle install
+> $ bin setup
 
 <p>Para gerar o banco de dados execute os comandos:</p>
 
 > $ rails db:create
 
 > $ rails db:migrate
+
+> $ rails db:seed
 
 #### Para rodar os testes: 
 
@@ -54,6 +56,12 @@
 * Execute no terminal: `$ rails server`
 * Abra em seu navegador: `localhost:3000`
 * Pronto! Você está na aplicação!
+
+#### Utilize uma das contas abaixo para logar na aplicação:
+
+* Administrador Algorich - email: milena@algorich.com / senha: 123456
+* Funcionário Americanas - email: clara@americans.com / senha: 123456
+* Candidato - email: carlos@mail.com / senha: 123456
 
 #### Gems utilizadas
 
