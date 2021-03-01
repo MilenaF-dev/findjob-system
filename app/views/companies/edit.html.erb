@@ -3,9 +3,9 @@
 <% if @company.errors.any? %>
   <div class="alert">
     <% if @company.persisted? %>
-      <p>Não foi possível editar a empresa</p>
+      <p><%= t(".edit_error") %></p>
     <% end %>
-    <p>Confira os erros abaixo:</p>
+    <p><%= t(".all_errors") %></p>
     <ul>
       <% @company.errors.full_messages.each do |message| %>
         <li><%= message %></li>

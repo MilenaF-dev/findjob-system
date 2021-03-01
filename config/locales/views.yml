@@ -6,6 +6,11 @@ pt-BR:
       placeholder_text: "Pesquise por vagas e empresas" 
       search: "Pesquisar"
       available_vacancies: "Vagas disponíveis"
+    search: 
+      already_applied: "(Já aplicou para esta vaga)"
+      results_search: "Resultados da busca"
+      available_vacancies: "Vagas disponíveis"
+      no_results: "Nenhum resultado encontrado"
   companies:
     index:
       company_registration: "Registrar empresa"
@@ -25,6 +30,8 @@ pt-BR:
       company_new: "Nova empresa"
     edit:
       company_edit: "Editar empresa"
+      edit_error: "Não foi possível editar a empresa"
+      all_errors: "Confira os erros abaixo:"
   vacancies:
     index:
       no_vacancy_available: "Nenhuma vaga disponível"

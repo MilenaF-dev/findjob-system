@@ -1,7 +1,7 @@
-<h1>Resultados da busca</h1>
+<h1><%= t(".results_search") %></h1>
 
 <% if @vacancies.any? %>
-  <h3><%= "Vagas disponíveis" %></h3>
+  <h3><%= t(".available_vacancies") %></h3>
     <% @vacancies.each do |vacancy| %>
         <p>
           <%= "#{Vacancy.human_attribute_name("title")}:" %>
@@ -16,7 +16,7 @@
     <% end %>
 
 <% elsif @companies.any? %>
-  <h3><%= "Empresas" %></h3>
+  <h3><%= Company.model_name.human(count: 2) %></h3>
     <% @companies.each do |company| %>
       <p>
         <%= "#{Company.human_attribute_name("name")}:" %>
@@ -29,7 +29,7 @@
       <hr>
     <% end %>
 <% else %>
-  <%= "Nenhum resultado encontrado" %><br>
+  <%= t(".no_results") %><br>
 <% end %>
 
 <%= link_to t("misc.back"), root_path %>
