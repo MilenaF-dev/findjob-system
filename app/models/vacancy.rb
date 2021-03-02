@@ -8,6 +8,7 @@ class Vacancy < ApplicationRecord
   validates :title, :level, :mandatory_requirements, :deadline, :total_vacancies, presence: true
 
   scope :future, -> { where("deadline >= ?", Date.current) }
+  scope :with_title_or_level, ->(search) { where("title like :search OR level like :search", search: "%#{search}%") }
 
   def filled?
     job_applications.approved.size >= total_vacancies

@@ -7,4 +7,6 @@ class Company < ApplicationRecord
 
   validates :name, :description, :address, :cnpj, :site, presence: true
   validates :name, :cnpj, uniqueness: true
+
+  scope :with_name, ->(search) { where("name like ?", "%#{search}%") }
 end

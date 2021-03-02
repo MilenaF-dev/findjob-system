@@ -93,7 +93,7 @@ feature "Visitor search for vacancies and companies" do
                     cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
 
     visit root_path
-    fill_in "Pesquise por vagas e empresas", with: "Americanas"
+    fill_in "Pesquise por vagas e empresas", with: "Amazon"
     click_on "Pesquisar"
 
     expect(current_path).to eq(search_path)

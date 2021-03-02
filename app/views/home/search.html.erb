@@ -14,8 +14,9 @@
         </p>
     <hr>
     <% end %>
+<% end %>
 
-<% elsif @companies.any? %>
+<% if @companies.any? %>
   <h3><%= Company.model_name.human(count: 2) %></h3>
     <% @companies.each do |company| %>
       <p>
@@ -28,7 +29,8 @@
       </p>
       <hr>
     <% end %>
-<% else %>
+<% end %>
+<% if @companies.empty? && @vacancies.empty? %>
   <%= t(".no_results") %><br>
 <% end %>
 
