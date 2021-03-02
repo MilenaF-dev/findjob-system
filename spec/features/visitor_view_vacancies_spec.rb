@@ -156,7 +156,7 @@ feature "Visitor view available vacancies" do
   scenario "only employees can see number of vacancies" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -180,7 +180,7 @@ feature "Visitor view available vacancies" do
   scenario "and only employees can see vacancies with deadline exceeded" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
     Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                     min_salary: 1500, max_salary: 3000, level: "Júnior",
                     mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -279,7 +279,7 @@ feature "Vacancy that was filled is not available" do
   scenario "vacancy is disabled if it was filled" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -328,7 +328,7 @@ feature "Vacancy that was filled is not available" do
   scenario "and only employees can see vacancies filled" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",

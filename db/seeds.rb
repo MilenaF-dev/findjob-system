@@ -1,11 +1,11 @@
 company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                           address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                          cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                          cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "algorich.com")
 company.logo.attach(io: File.open(Rails.root.join("spec", "support", "logo_algorich.png")), filename: "logo_algorich.png")
 
 other_company = Company.create!(name: "Americanas", description: "Varejo de diversos produtos",
                                 address: "Rua Voluntários da Pátria, nº400, Centro, Campos dos Goytacazes-RJ",
-                                cnpj: "789.546.333/000", site: "americanas.com.br", social_networks: "@americanas")
+                                cnpj: "789.546.333/000", site: "americanas.com.br", social_networks: "@americanas", domain: "americanas.com")
 
 junior_vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                                  min_salary: 1500, max_salary: 3000, level: "Júnior",

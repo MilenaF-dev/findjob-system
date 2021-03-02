@@ -25,6 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         redirect_to company_path(@user.company)
       end
     else
+      @user.admin = @user.company.present?
       render :new
     end
   end

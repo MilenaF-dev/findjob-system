@@ -10,7 +10,8 @@ feature "User registers a vacancy" do
   scenario "from index page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -38,7 +39,8 @@ feature "User registers a vacancy" do
   scenario "successfully" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -72,7 +74,8 @@ feature "User registers a vacancy" do
   scenario "and attributes cannot be blank" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -100,7 +103,8 @@ feature "User registers a vacancy" do
   scenario "and return to company page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee
@@ -132,7 +136,8 @@ feature "User edit a existent vacancy" do
   scenario "from index page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -168,7 +173,8 @@ feature "User edit a existent vacancy" do
   scenario "successfully" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -194,7 +200,8 @@ feature "User edit a existent vacancy" do
   scenario "and attributes cannot be blank" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -225,7 +232,8 @@ feature "User edit a existent vacancy" do
   scenario "and return to vacancy page" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               level: "Júnior", min_salary: 1500, max_salary: 3000,
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -246,7 +254,8 @@ feature "User edit a existent vacancy" do
   scenario "edit request protected if employee is from other company", type: :request do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich", domain: "email.com")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento",
                                     address: "Campos dos Goytacazes-RJ",
                                     cnpj: "543.123.678/010", site: "tech.com.br", social_networks: "@tech.dev", domain: "dev.com")

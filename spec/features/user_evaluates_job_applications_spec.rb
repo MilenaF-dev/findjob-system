@@ -22,7 +22,8 @@ feature "Employee evaluate applications" do
   scenario "have links" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -47,7 +48,8 @@ feature "Employee evaluate applications" do
   scenario "refuse application" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -73,7 +75,8 @@ feature "Employee evaluate applications" do
   scenario "send proposal" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -101,7 +104,8 @@ feature "Employee evaluate applications" do
   scenario "attributes can not be blank" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -130,7 +134,8 @@ feature "Employee evaluate applications" do
   scenario "links disappear if the application was already evaluated" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -154,7 +159,8 @@ feature "Employee views job applications received for vacancy" do
   scenario "successfully" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -179,7 +185,8 @@ feature "Employee views job applications received for vacancy" do
   scenario "and no job application" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -203,7 +210,8 @@ feature "Employee views candidate's answer" do
   scenario "candidate declined proposal" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -232,7 +240,8 @@ feature "Employee views candidate's answer" do
   scenario "candidate accepted proposal" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",

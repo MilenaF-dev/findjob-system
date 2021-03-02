@@ -11,7 +11,8 @@ feature "Employee views all applications" do
   scenario "have link" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
     login_as employee, scope: :user
@@ -24,7 +25,8 @@ feature "Employee views all applications" do
   scenario "link disappears if employee is from other company" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento de softwares",
                                     address: "Avenida Alberto Lamego, Campos dos Goytacazes-RJ",
                                     cnpj: "567.289.345/010", site: "tech.com.br", social_networks: "@techch")
@@ -55,7 +57,8 @@ feature "Employee views all applications" do
   scenario "successfully" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -80,7 +83,8 @@ feature "Employee views all applications" do
   scenario "employee views candidate profile" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -107,7 +111,8 @@ feature "Employee views all applications" do
   scenario "can not view applications from another company" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     other_company = Company.create!(name: "Tech", description: "Empresa de desenvolvimento de softwares",
                                     address: "Avenida Alberto Lamego, Campos dos Goytacazes-RJ",
                                     cnpj: "567.289.345/010", site: "tech.com.br", social_networks: "@techch")
@@ -134,7 +139,8 @@ feature "Employee views candidate's answer" do
   scenario "candidate declined proposal" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
@@ -162,7 +168,8 @@ feature "Employee views candidate's answer" do
   scenario "candidate accepted proposal" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
+                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
+                              domain: "email.com")
     vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
                               min_salary: 1500, max_salary: 3000, level: "Júnior",
                               mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
