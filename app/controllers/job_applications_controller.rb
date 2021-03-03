@@ -12,13 +12,14 @@ class JobApplicationsController < ApplicationController
 
   def create
     vacancy = Vacancy.find(params[:vacancy_id])
+    @job_application = JobApplication.new(vacancy: vacancy, candidate: current_candidate)
 
-    return flash[:notice] = t("job_applications.messages.already_created") if vacancy.candidates.include?(current_candidate)
-
-    JobApplication.create(vacancy: vacancy, candidate: current_candidate)
-    NotificationsMailer.job_application_email(current_candidate, vacancy, vacancy.company).deliver_later
-
-    flash[:notice] = t("job_applications.messages.created")
-    redirect_to vacancy_path(vacancy)
+    if @job_application.save
+      NotificationsMailer.job_application_email(current_candidate, vacancy, vacancy.company).deliver_later
+      flash[:notice] = t("job_applications.messages.created")
+      redirect_to vacancy_path(vacancy)
+    else
+      flash[:notice] = t("job_applications.messages.already_created")
+    end
   end
 end

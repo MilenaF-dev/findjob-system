@@ -5,6 +5,8 @@ class JobApplication < ApplicationRecord
   has_one :feedback
   has_one :answer, through: :feedback
 
+  validates :candidate_id, uniqueness: { scope: :vacancy_id }
+  
   scope :approved, -> { includes(:answer).where(answer: { accepted: true }) }
 
   def reviewed?
