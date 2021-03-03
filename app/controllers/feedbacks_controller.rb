@@ -2,8 +2,7 @@ class FeedbacksController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @feedback = Feedback.new
-    @accept = params[:accept] == "true"
+    @feedback = Feedback.new(accepted: params[:accept] == "true" )
   end
 
   def create
@@ -15,7 +14,6 @@ class FeedbacksController < ApplicationController
       NotificationsMailer.feedback_email(@feedback).deliver_later
       redirect_to job_applications_path
     else
-      @accept = @feedback.accepted?
       render :new
     end
   end

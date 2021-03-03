@@ -12,6 +12,7 @@ class JobApplicationsController < ApplicationController
 
   def create
     vacancy = Vacancy.find(params[:vacancy_id])
+    
     @job_application = JobApplication.new(vacancy: vacancy, candidate: current_candidate)
 
     if @job_application.save

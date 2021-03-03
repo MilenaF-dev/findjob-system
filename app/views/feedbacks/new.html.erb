@@ -11,9 +11,9 @@
     <%= form.text_area :reason %>
   </div>
 
-  <%= form.hidden_field :accepted, value: @accept %>
+  <%= form.hidden_field :accepted %>
 
-  <% if @accept %>
+  <% if @feedback.accepted %>
     <div>
       <%= form.label :salary_proposal %><br>
       <%= form.text_field :salary_proposal %>

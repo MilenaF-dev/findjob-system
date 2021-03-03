@@ -7,9 +7,9 @@
 
 <%= form_with model: @answer, url: feedback_answer_index_path(@feedback) do |form| %>
 
-  <%= form.hidden_field :accepted, value: @accept %>
+  <%= form.hidden_field :accepted %>
 
-  <% if @accept %>
+  <% if @answer.accepted %>
     <div>
       <%= form.label :start_date %><br>
       <%= form.date_field :start_date %>

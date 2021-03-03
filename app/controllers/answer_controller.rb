@@ -3,9 +3,7 @@ class AnswerController < ApplicationController
 
   def new
     @feedback = Feedback.find(params[:feedback_id])
-    @answer = Feedback.new(start_date: @feedback.start_date)
-
-    @accept = params[:accept] == "true"
+    @answer = Feedback.new(start_date: @feedback.start_date, accepted: params[:accept] == "true")
   end
 
   def create
@@ -15,7 +13,6 @@ class AnswerController < ApplicationController
     if @answer.save
       redirect_to job_applications_path
     else
-      @accept = @answer.accepted?
       render :new
     end
   end
