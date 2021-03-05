@@ -56,7 +56,7 @@ feature "Visitor view companies" do
 
     visit root_path
     click_on "Empresas"
-    click_on "Voltar"
+    click_on "Home"
 
     expect(current_path).to eq root_path
   end

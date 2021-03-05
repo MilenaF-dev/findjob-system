@@ -1,36 +1,65 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>FindjobSystem</title>
+<html lang="pt-BR">
+  <head>    
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+
+    <title>FindjobSystem</title>
   </head>
 
   <body>
-    <nav>
-      <% if user_signed_in? %>
-        <%= current_user.email %>
-        <%= link_to t("misc.company_area"), company_path(current_user.company) %>
-        <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete %>
-      <% elsif candidate_signed_in? %>
-        <%= current_candidate.email %>
-        <%= link_to t("misc.my_applications"), job_applications_path %>
-        <%= link_to t("misc.my_profile"), candidate_path(current_candidate) %>
-        <%= link_to t("misc.exit"), destroy_candidate_session_path, method: :delete %>
-      <% else %>
-        <%= link_to t("misc.registration"), new_candidate_registration_path %>
-        <%= link_to t("misc.enter"), new_candidate_session_path %>
-        <%= link_to t("misc.company_access"), new_user_session_path %>
-      <% end %>
-    </nav>
+    <header class="position-relative">
+      <nav>
+        <div class="d-flex justify-content-end mr-3">
+          <% if user_signed_in? %>
+            <%= current_user.email %>
+            <%= link_to t("misc.company_area"), company_path(current_user.company) %>
+            <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete %>
+          <% elsif candidate_signed_in? %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
+            <div class="dropdown mr-5">
+              <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_candidate.email %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to t("misc.my_applications"), job_applications_path, class: "dropdown-item" %>
+                <%= link_to t("misc.my_profile"), candidate_path(current_candidate), class: "dropdown-item" %>
+                <%= link_to t("misc.exit"), destroy_candidate_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </div>
+
+          <% else %>
+            <%= link_to t("misc.company_access"), new_user_session_path, class: "p-1" %>
+            <%= link_to t("misc.registration"), new_candidate_registration_path, class: "p-1" %>
+            <%= link_to t("misc.enter"), new_candidate_session_path, class: "p-1 me-3" %>
+          <% end %>
+        </div>
+
+        <div class="container d-flex justify-content-center">
+          <h1 class="position-absolute text-white mt-4">FindJob</h1>
+          <div class="navbar">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link <%= "active" if current_page?(root_path) %>" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= "active" if current_page?(companies_path) %>" href="/companies">Empresas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= "active" if current_page?(vacancies_path) %>" href="/vacancies">Vagas disponíveis</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <p class="notice p-0"><%= notice %></p>
+    <p class="alert p-0"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

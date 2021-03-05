@@ -1,25 +1,33 @@
-<h1><%= Company.model_name.human(count: 2) %></h1>
+ <div class="container"> 
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4 p-3">
+      <%= form_with url: companies_path, method: :get do %>
+        <div class="input-group">
+          <%= label_tag :search, "" %>
+          <%= text_field_tag :search, "", placeholder: t(".placeholder_text"), class: "form-control rounded" %>
+          <%= submit_tag t(".search"), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<%= form_with url: companies_path, method: :get do %>
-  <%= label_tag :search, "" %>
-  <%= text_field_tag :search, "", placeholder: t(".placeholder_text") %>
-  <%= submit_tag t(".search") %>
-<% end %>
-
-<% if @companies.empty? %>
-  <div class="warning"><%= t(".no_registered_company") %></div>
-<% else %>
-  <dl>
-    <% @companies.each do |company| %>
-          <dt><%= Company.human_attribute_name("name") %></dt>
-          <dd><%= link_to company.name, company_path(company) %></dd>
-          <dt><%= Company.human_attribute_name("cnpj") %></dt>
-          <dd><%= company.cnpj %></dd>
-          <dt><%= Company.human_attribute_name("site") %></dt>
-          <dd><%= company.site %></dd>
-          <hr>
-    <% end %>
-  </dl>
-<% end %>
-
-<%= link_to t("misc.back"), root_path %>
+  <% if @companies.empty? %>
+    <div class="warning"><%= t(".no_registered_company") %></div>
+  <% else %>
+      <div class="row justify-content-center mt-3">
+        <% @companies.each do |company| %>
+          <div class="col-12 col-md-6 col-lg-3 mb-2">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center"><dt><%= link_to company.name, company_path(company) %></dt></h5>
+                <dt><%= Company.human_attribute_name("cnpj") %></dt>
+                <dd><%= company.cnpj %></dd>
+                <dt><%= Company.human_attribute_name("site") %></dt>
+                <dd><%= company.site %></dd>
+              </div>
+            </div>
+          </div> 
+        <% end %>
+      </div>
+  <% end %>
+</div>

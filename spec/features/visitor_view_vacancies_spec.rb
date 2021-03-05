@@ -105,7 +105,7 @@ feature "Visitor view available vacancies" do
 
     visit root_path
     click_on "Vagas disponíveis"
-    click_on "Voltar"
+    click_on "Home"
 
     expect(current_path).to eq root_path
   end
