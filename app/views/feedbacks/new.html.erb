@@ -1,31 +1,36 @@
-<% if @feedback.errors.any? %>
-  <% @feedback.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
+<div class="container">
+  <% if @feedback.errors.any? %>
+    <% @feedback.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
   <% end %>
-<% end %>
 
+  <div class="row  justify-content-center form-group">
+    <div class="col-4">
+      <%= form_with model: [:job_application, @feedback] do |form| %>
+        <div>
+          <%= form.label :reason, class: "mb-0" %><br>
+          <%= form.text_area :reason, class: "form-control mb-3" %>
+        </div>
 
-<%= form_with model: [:job_application, @feedback] do |form| %>
-  <div>
-    <%= form.label :reason %><br>
-    <%= form.text_area :reason %>
-  </div>
+        <%= form.hidden_field :accepted, class: "mb-0" %>
 
-  <%= form.hidden_field :accepted %>
+        <% if @feedback.accepted %>
+          <div>
+            <%= form.label :salary_proposal, class: "mb-0" %><br>
+            <%= form.text_field :salary_proposal, class: "form-control mb-3" %>
+          </div>
 
-  <% if @feedback.accepted %>
-    <div>
-      <%= form.label :salary_proposal %><br>
-      <%= form.text_field :salary_proposal %>
+          <div>
+            <%= form.label :start_date, class: "mb-0" %><br>
+            <%= form.date_field :start_date, class: "form-control mb-3" %>
+          </div>
+        <% end %><br>
+
+        <div>
+          <%= form.submit t(".send_feedback"), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %><br>
     </div>
-
-    <div>
-      <%= form.label :start_date %><br>
-      <%= form.date_field :start_date %>
-    </div>
-  <% end %><br>
-
-  <div>
-    <%= form.submit t(".send_feedback") %>
   </div>
-<% end %><br>
+</div>

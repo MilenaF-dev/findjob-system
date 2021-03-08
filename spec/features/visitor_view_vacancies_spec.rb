@@ -110,23 +110,6 @@ feature "Visitor view available vacancies" do
     expect(current_path).to eq root_path
   end
 
-  scenario "and return to vacancies page" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
-    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              min_salary: 1500, max_salary: 3000, level: "Júnior",
-                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
-
-    visit root_path
-    click_on "Vagas disponíveis"
-    click_on vacancy.title
-    click_on "Voltar"
-
-    expect(current_path).to eq vacancies_path
-  end
-
   scenario "only enable vacancies from a company" do
     company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
                               address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
@@ -191,7 +174,8 @@ feature "Visitor view available vacancies" do
     visit company_path(company)
 
     expect(current_path).to eq(company_path(company))
-    expect(page).to have_content("Dev Júnior (Vaga expirada")
+    expect(page).to have_content("Dev Júnior")
+    expect(page).to have_content("(Vaga expirada)")
     expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
     expect(page).not_to have_link("Desabilitar vaga")
   end
@@ -346,7 +330,8 @@ feature "Vacancy that was filled is not available" do
     login_as employee
     visit company_path(company)
 
-    expect(page).to have_content("Dev Júnior (Vaga desabilitada)")
+    expect(page).to have_content("Dev Júnior")
+    expect(page).to have_content("(Vaga desabilitada)")
     expect(page).to have_content("Vaga de desenvolvidor júnior Ruby on Rails")
   end
 end

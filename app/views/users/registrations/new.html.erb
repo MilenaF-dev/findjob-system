@@ -1,72 +1,77 @@
-<h2><%= t(".register") %></h2>
+<div class="container">
+  <h2><%= t(".register") %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="row  justify-content-center form-group">
+    <div class="col-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="field">
+          <%= f.label :email, class: "mb-0" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-3" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em><%= t(".minimum_of_characters", length: @minimum_password_length) %></em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        <div class="field">
+          <%= f.label :password, class: "mb-0" %>
+          <% if @minimum_password_length %>
+          <em><%= t(".minimum_of_characters", length: @minimum_password_length) %></em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control mb-3" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="field">
+          <%= f.label :password_confirmation, class: "mb-0" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mb-3" %>
+        </div>
 
-  
-  <% if resource.admin? %>
-    <h3><%= t(".company_register") %></h3>
+        
+        <% if resource.admin? %>
+          <h3><%= t(".company_register") %></h3>
 
-    <%= f.fields_for :company do |cf| %>
-      <div>
-        <%= cf.label :name %><br>
-        <%= cf.text_field :name %>
-      </div>
+          <%= f.fields_for :company do |cf| %>
+            <div>
+              <%= cf.label :name, class: "mb-0" %><br>
+              <%= cf.text_field :name, class: "form-control mb-3" %>
+            </div>
 
-      <div>
-        <%= cf.label :logo %><br>
-        <%= cf.file_field :logo %>
-      </div>
+            <div>
+              <%= cf.label :logo, class: "mb-0" %><br>
+              <%= cf.file_field :logo, class: "form-control-file mb-3" %>
+            </div>
 
-      <div>
-        <%= cf.label :description %><br>
-        <%= cf.text_area :description %>
-      </div>
+            <div>
+              <%= cf.label :description, class: "mb-0" %><br>
+              <%= cf.text_area :description, class: "form-control mb-3" %>
+            </div>
 
-    <div>
-      <%= cf.label :address %><br>
-      <%= cf.text_area :address %>
+          <div>
+            <%= cf.label :address, class: "mb-0" %><br>
+            <%= cf.text_area :address, class: "form-control mb-3" %>
+          </div>
+
+          <div>
+            <%= cf.label :cnpj, class: "mb-0" %><br>
+            <%= cf.text_field :cnpj, class: "form-control mb-3" %>
+          </div>
+
+          <div>
+            <%= cf.label :site, class: "mb-0" %><br>
+            <%= cf.text_field :site, class: "form-control mb-3" %>
+          </div>
+
+          <div>
+            <%= cf.label :social_networks, class: "mb-0" %><br>
+            <%= cf.text_field :social_networks, class: "form-control" %>
+          </div><br>
+          <% end %>
+        <% end %>
+
+        <div class="actions mb-2">
+          <%= f.submit t("misc.registration"), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+
+      <%= render "users/shared/links" %>
     </div>
-
-    <div>
-      <%= cf.label :cnpj %><br>
-      <%= cf.text_field :cnpj %>
-    </div>
-
-    <div>
-      <%= cf.label :site %><br>
-      <%= cf.text_field :site %>
-    </div>
-
-    <div>
-      <%= cf.label :social_networks %><br>
-      <%= cf.text_field :social_networks %>
-    </div><br>
-    <% end %>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t("misc.registration") %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
-<%= link_to t("misc.back"), root_path %>
+</div>

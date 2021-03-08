@@ -144,7 +144,6 @@ feature "Candidate views his profile" do
     expect(page).to have_content("9999999")
     expect(page).to have_content("Tenho 25 anos, formada em Economia")
     expect(page).to have_link("Editar perfil")
-    expect(page).to have_link("Voltar")
   end
 end
 

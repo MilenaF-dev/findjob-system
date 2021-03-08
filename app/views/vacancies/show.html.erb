@@ -1,3 +1,4 @@
+<div class="container">  
   <% if @vacancy.disabled? %>
     <h1><%= t(".disabled_title", title: @vacancy.title) %></h1>
     <% if @vacancy.filled? && current_user&.company == @vacancy.company %>
@@ -9,76 +10,89 @@
     <h1><%= @vacancy.title %></h1>
   <% end %>
 
-<dl>
-  <dt><%= Company.model_name.human(count: 1) %></dt>
-  <dd><%= @vacancy.company.name %></dd>
-  <dt><%= Vacancy.human_attribute_name("description") %></dt>
-  <dd><%= @vacancy.description %></dd>
-  <dt><%= Vacancy.human_attribute_name("level") %></dt>
-  <dd><%= @vacancy.level %></dd>
-  <dt><%= t(".salary_range") %></dt>
-  <dd><%= t(".salary", begin: number_to_currency(@vacancy.min_salary), end: number_to_currency(@vacancy.max_salary)) %></dd>
-  <dt><%= Vacancy.human_attribute_name("mandatory_requirements") %></dt>
-  <dd><%= @vacancy.mandatory_requirements %></dd>
-  <dt><%= Vacancy.human_attribute_name("deadline") %></dt>
-  <dd><%= l(@vacancy.deadline) %></dd>
-   <% if current_user&.company == @vacancy.company %>
-    <dt><%= Vacancy.human_attribute_name("total_vacancies") %></dt>
-    <dd><%= @vacancy.total_vacancies %></dd>
-    <% end %>
-</dl>
 
-<% unless current_user || @vacancy.candidates.include?(current_candidate) %>
-  <%= link_to "Aplicar para esta vaga", vacancy_job_applications_path(@vacancy), method: :post %><br>
-<% end %>
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <dl>
+            <dt><%= Company.model_name.human(count: 1) %></dt>
+            <dd><%= @vacancy.company.name %></dd>
+            <dt><%= Vacancy.human_attribute_name("description") %></dt>
+            <dd><%= @vacancy.description %></dd>
+            <dt><%= Vacancy.human_attribute_name("level") %></dt>
+            <dd><%= @vacancy.level %></dd>
+            <dt><%= t(".salary_range") %></dt>
+            <dd><%= t(".salary", begin: number_to_currency(@vacancy.min_salary), end: number_to_currency(@vacancy.max_salary)) %></dd>
+            <dt><%= Vacancy.human_attribute_name("mandatory_requirements") %></dt>
+            <dd><%= @vacancy.mandatory_requirements %></dd>
+            <dt><%= Vacancy.human_attribute_name("deadline") %></dt>
+            <dd><%= l(@vacancy.deadline) %></dd>
+            <% if current_user&.company == @vacancy.company %>
+              <dt><%= Vacancy.human_attribute_name("total_vacancies") %></dt>
+              <dd><%= @vacancy.total_vacancies %></dd>
+              <% end %>
+          </dl>
 
-<% if current_user&.company == @vacancy.company %>
-  <%= link_to t(".edit"), edit_vacancy_path(@vacancy) %><br>
-
-  <% if !@vacancy.deadline.past? %>
-    <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %>
-    <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %>
-  <% end %>
-<% end %><br>
-
-
-<% if current_user&.company == @vacancy.company %> 
-  <h3>Candidaturas recebidas para esta vaga</h3>
-  <% if @vacancy.job_applications.empty? %>
-    <div class="warning"><%= t(".no_application") %></div>
-  <% else %>
-  <dl>
-    <% @vacancy.job_applications.each do |job_application| %>
-      <dt><%= Candidate.model_name.human %></dt>
-      <dd><%= link_to job_application.candidate.full_name, candidate_path(job_application.candidate) %></dd>
-      <dt><%= Candidate.human_attribute_name("email") %></dt>
-      <dd><%= job_application.candidate.email %></dd>
-      <dt><%= t(".applied_date") %>
-      <dd><%= l(job_application.created_at.to_date) %></dd>
-      <dt><%= t(".status") %></dt>
-      <% if !job_application.reviewed? %>
-        <dd><%= t(".pending_evaluation") %></dd><br>
-        <%= link_to t(".refuse"), new_job_application_feedback_path(job_application, accept: false) %>
-        <%= link_to t(".send_proposal"), new_job_application_feedback_path(job_application, accept: true) %>  
-      <% elsif job_application.accepted? %>
-        <dd><%= t(".proposal_sent") %></dd>
-
-        <% if job_application.feedback.answer.present? %>
-            <%= t(".candidate_answer") %>
-          <% if job_application.feedback.answer.accepted? %>
-            <dd><%= t(".proposal_accepted") %></dd>
-            <dd><%= "#{Feedback.human_attribute_name("start_date")}: #{l(job_application.feedback.answer.start_date)}" %></dd>
-          <% else %>
-              <dd><%= t(".proposal_declined") %></dd>
-              <dd><%= "#{Feedback.human_attribute_name("reason")}: #{job_application.feedback.answer.reason}" %></dd>
+          <% unless current_user || @vacancy.candidates.include?(current_candidate) %>
+            <%= link_to "Aplicar para esta vaga", vacancy_job_applications_path(@vacancy), method: :post %><br>
           <% end %>
-        <% end %>
-      <% else %>
-        <dd><%= t(".declined") %></dd>
+
+          <% if current_user&.company == @vacancy.company %>
+            <%= link_to t(".edit"), edit_vacancy_path(@vacancy), class: "card-link mr-4" %>
+
+            <% if !@vacancy.deadline.past? %>
+              <%= link_to t(".disable_vacancy"), disable_vacancy_path(@vacancy), method: :post unless @vacancy.disabled? %>
+              <%= link_to t(".enable_vacancy"), enable_vacancy_path(@vacancy), method: :post unless @vacancy.enabled? %>
+            <% end %>
+          <% end %><br>
+        </div>      
+      </div>      
+    </div>      
+  </div>
+
+  <% if current_user&.company == @vacancy.company %> 
+    <h3 class="text-center mt-3">Candidaturas recebidas para esta vaga</h3>
+    <% if @vacancy.job_applications.empty? %>
+      <div class="warning"><%= t(".no_application") %></div>
+    <% else %>
+      <div class="row justify-content-center mt-3">
+        <div class="col-12 col-md-6 col-lg-4 mb-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <% @vacancy.job_applications.each do |job_application| %>
+                <dt><%= Candidate.model_name.human %></dt>
+                <dd><%= link_to job_application.candidate.full_name, candidate_path(job_application.candidate) %></dd>
+                <dt><%= Candidate.human_attribute_name("email") %></dt>
+                <dd><%= job_application.candidate.email %></dd>
+                <dt><%= t(".applied_date") %>
+                <dd><%= l(job_application.created_at.to_date) %></dd>
+                <dt><%= t(".status") %></dt>
+                <% if !job_application.reviewed? %>
+                  <dd><%= t(".pending_evaluation") %></dd><br>
+                  <%= link_to t(".refuse"), new_job_application_feedback_path(job_application, accept: false) %>
+                  <%= link_to t(".send_proposal"), new_job_application_feedback_path(job_application, accept: true) %>  
+                <% elsif job_application.accepted? %>
+                  <dd><%= t(".proposal_sent") %></dd>
+
+                  <% if job_application.feedback.answer.present? %>
+                      <%= t(".candidate_answer") %>
+                    <% if job_application.feedback.answer.accepted? %>
+                      <dd><%= t(".proposal_accepted") %></dd>
+                      <dd><%= "#{Feedback.human_attribute_name("start_date")}: #{l(job_application.feedback.answer.start_date)}" %></dd>
+                    <% else %>
+                        <dd><%= t(".proposal_declined") %></dd>
+                        <dd><%= "#{Feedback.human_attribute_name("reason")}: #{job_application.feedback.answer.reason}" %></dd>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <dd><%= t(".declined") %></dd>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>    
       <% end %>
     <% end %>
-    <hr>
-  <% end %>
-<% end %>
-    
-<%= link_to t("misc.back"), :back %>
+  <% end %> 
+</div>      

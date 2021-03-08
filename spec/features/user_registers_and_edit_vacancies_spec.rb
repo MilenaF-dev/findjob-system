@@ -68,7 +68,6 @@ feature "User registers a vacancy" do
     expect(page).to have_content("Conhecimentos em Ruby, Rails, SQLite")
     expect(page).to have_content("22/10/2021")
     expect(page).not_to have_link("Aplicar para esta vaga")
-    expect(page).to have_link("Voltar")
   end
 
   scenario "and attributes cannot be blank" do
@@ -98,23 +97,6 @@ feature "User registers a vacancy" do
     expect(page).to have_content("Requisitos obrigatórios não pode ficar em branco")
     expect(page).to have_content("Data limite não pode ficar em branco")
     expect(page).to have_content("Total de vagas não pode ficar em branco")
-  end
-
-  scenario "and return to company page" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
-                              domain: "email.com")
-    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
-
-    login_as employee
-    visit root_path
-    click_on "Empresas"
-    click_on company.name
-    click_on "Cadastrar uma vaga"
-    click_on "Voltar"
-
-    expect(current_path).to eq(company_path(company))
   end
 end
 
@@ -194,7 +176,6 @@ feature "User edit a existent vacancy" do
     expect(page).to have_content("Dev")
     expect(page).to have_content("De R$ 1.000,00 até R$ 3.000,0")
     expect(page).to have_content("30/08/2022")
-    expect(page).to have_link("Voltar")
   end
 
   scenario "and attributes cannot be blank" do
@@ -227,27 +208,6 @@ feature "User edit a existent vacancy" do
     expect(page).to have_content("Requisitos obrigatórios não pode ficar em branco")
     expect(page).to have_content("Data limite não pode ficar em branco")
     expect(page).to have_content("Total de vagas não pode ficar em branco")
-  end
-
-  scenario "and return to vacancy page" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich",
-                              domain: "email.com")
-    vacancy = Vacancy.create!(title: "Dev Júnior", description: "Vaga de desenvolvidor júnior Ruby on Rails",
-                              level: "Júnior", min_salary: 1500, max_salary: 3000,
-                              mandatory_requirements: "Conhecimentos em Ruby, Rails, SQLite",
-                              deadline: "22/10/2021", total_vacancies: 3, company: company, status: :enabled)
-    employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
-
-    login_as employee
-    visit root_path
-    click_on "Vagas disponíveis"
-    click_on vacancy.title
-    click_on "Editar"
-    click_on "Voltar"
-
-    expect(current_path).to eq(vacancy_path(vacancy))
   end
 
   # Passar testes de request para outro arquivo

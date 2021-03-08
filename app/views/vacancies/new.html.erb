@@ -1,5 +1,9 @@
-<h1><%= t(".vacancy_new") %></h1>
+<div class="container">
+  <h1><%= t(".vacancy_new") %></h1>
 
-<%= render "form", vacancy: @vacancy %>
-
-<%= link_to t("misc.back"), :back %>
+  <div class="row  justify-content-center form-group">
+    <div class="col-4">
+      <%= render "form", vacancy: @vacancy %>
+    </div>
+  </div>
+</div>

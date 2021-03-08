@@ -101,7 +101,7 @@ pt-BR:
         currently_waiting_confirmation_for_email: 'No momento esperando por: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: (deixe em branco caso não queira alterá-la)
         minimum_of_characters: '(minímo de %{length} caracteres)'
-        title: Editar perfil %{resource}
+        title: Editar perfil
         unhappy: Não está contente?
         cancel: Cancelar
         update: Atualizar

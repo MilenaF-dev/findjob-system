@@ -1,37 +1,49 @@
-<h1><%= t(".results_search") %></h1>
+<div class="container">  
+  <h1><%= t(".results_search") %></h1>
 
-<% if @vacancies.any? %>
-  <h3><%= t(".available_vacancies") %></h3>
-    <% @vacancies.each do |vacancy| %>
-        <p>
-          <%= "#{Vacancy.human_attribute_name("title")}:" %>
-          <%= link_to vacancy.title, vacancy_path(vacancy) %>
-          <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %>
-        </p>
-        <p>
-          <%= "#{Vacancy.human_attribute_name("level")}:" %>
-          <%= vacancy.level %>
-        </p>
-    <hr>
-    <% end %>
-<% end %>
+  <% if @vacancies.any? %>
+    <h3 class="text-center"><%= t(".available_vacancies") %></h3>
+    <div class="row justify-content-center mt-3">
+      <% @vacancies.each do |vacancy| %>
+        <div class="col-12 col-md-6 col-lg-3 mb-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center m-0"><dt><%= link_to vacancy.title, vacancy_path(vacancy) %><dt></h5>
+                <dd class="text-center">
+                  <%= t(".already_applied") if candidate_signed_in? && vacancy.candidates.include?(current_candidate) %>
+                </dd>
+                <div class="pl-2">
+                  <dt><%= Vacancy.human_attribute_name("level") %></dt>
+                  <dd><%= vacancy.level %></dd>
+                  <dt><%= Company.model_name.human %></dt>
+                  <dd><%= vacancy.company.name %></dd>
+                </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-<% if @companies.any? %>
-  <h3><%= Company.model_name.human(count: 2) %></h3>
-    <% @companies.each do |company| %>
-      <p>
-        <%= "#{Company.human_attribute_name("name")}:" %>
-        <%= link_to company.name, company_path(company) %>
-      </p>
-      <p>
-        <%= "#{Company.human_attribute_name("description")}:" %>
-        <%= company.description %>
-      </p>
-      <hr>
-    <% end %>
-<% end %>
-<% if @companies.empty? && @vacancies.empty? %>
-  <%= t(".no_results") %><br>
-<% end %>
-
-<%= link_to t("misc.back"), root_path %>
+  <% if @companies.any? %>
+    <h3 class="text-center"><%= Company.model_name.human(count: 2) %></h3>
+    <div class="row justify-content-center mt-3">
+      <% @companies.each do |company| %>
+        <div class="col-12 col-md-6 col-lg-3 mb-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center"><dt><%= link_to company.name, company_path(company) %></dt></h5>
+              <dt><%= Company.human_attribute_name("cnpj") %></dt>
+              <dd><%= company.cnpj %></dd>
+              <dt><%= Company.human_attribute_name("site") %></dt>
+              <dd><%= company.site %></dd>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <% if @companies.empty? && @vacancies.empty? %>
+    <p class="text-center mt-3"><%= t(".no_results") %><br></p>
+  <% end %>
+</div>

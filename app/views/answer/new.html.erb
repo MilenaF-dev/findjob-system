@@ -1,28 +1,33 @@
-<% if @answer.errors.any? %>
-  <% @answer.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
+<div class="container">
+  <% if @answer.errors.any? %>
+    <% @answer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
   <% end %>
-<% end %>
 
+  <div class="row  justify-content-center form-group">
+    <div class="col-4">
+      <%= form_with model: @answer, url: feedback_answer_index_path(@feedback) do |form| %>
 
-<%= form_with model: @answer, url: feedback_answer_index_path(@feedback) do |form| %>
+        <%= form.hidden_field :accepted %>
 
-  <%= form.hidden_field :accepted %>
+        <% if @answer.accepted %>
+          <div>
+            <%= form.label :start_date, class: "mb-0" %><br>
+            <%= form.date_field :start_date, class: "form-control" %>
+          </div>
 
-  <% if @answer.accepted %>
-    <div>
-      <%= form.label :start_date %><br>
-      <%= form.date_field :start_date %>
+        <% else %>
+          <div>
+            <%= form.label :reason, class: "mb-0" %><br>
+            <%= form.text_area :reason, class: "form-control" %>
+          </div>
+        <% end %><br>
+
+        <div>
+          <%= form.submit t(".send_answer"), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %><br>
     </div>
-
-  <% else %>
-    <div>
-      <%= form.label :reason %><br>
-      <%= form.text_area :reason %>
-    </div>
-  <% end %><br>
-
-  <div>
-    <%= form.submit t(".send_answer") %>
   </div>
-<% end %><br>
+</div>

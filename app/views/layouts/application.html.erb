@@ -16,9 +16,15 @@
       <nav>
         <div class="d-flex justify-content-end mr-3">
           <% if user_signed_in? %>
-            <%= current_user.email %>
-            <%= link_to t("misc.company_area"), company_path(current_user.company) %>
-            <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete %>
+            <div class="dropdown mr-5">
+              <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.email %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to t("misc.company_area"), company_path(current_user.company), class: "dropdown-item" %>
+                <%= link_to t("misc.exit"), destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </div>
           <% elsif candidate_signed_in? %>
 
             <div class="dropdown mr-5">
@@ -58,8 +64,10 @@
       </nav>
     </header>
 
-    <p class="notice p-0"><%= notice %></p>
-    <p class="alert p-0"><%= alert %></p>
+    <div class="container">
+      <p class="notice p-0"><%= notice %></p>
+      <p class="alert p-0"><%= alert %></p>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -16,47 +16,51 @@
 
 <%= form_with model: vacancy do |form| %>
   <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: "mb-0" %><br>
+    <%= form.text_field :title, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
+    <%= form.label :description, class: "mb-0" %><br>
+    <%= form.text_area :description, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :level %><br>
-    <%= form.text_field :level %>
+    <%= form.label :level, class: "mb-0" %><br>
+    <%= form.text_field :level, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :min_salary %><br>
-    <%= form.text_field :min_salary %>
+    <p class="mb-0">Salário</p>
+    <div class="row">
+      <div class="col-6">
+        <%= form.label :min_salary, class: "mb-0" %>
+        <%= form.text_field :min_salary, class: "form-control mb-3" %>
+      </div>
+      <div class="col-6">
+        <%= form.label :max_salary, class: "mb-0" %>
+        <%= form.text_field :max_salary, class: "form-control mb-3" %>
+      </div>
+    </div>
   </div>
-
+  
   <div>
-    <%= form.label :max_salary %><br>
-    <%= form.text_field :max_salary %>
-  </div>
-
-  <div>
-    <%= form.label :mandatory_requirements %><br>
-    <%= form.text_area :mandatory_requirements %>
+    <%= form.label :mandatory_requirements, class: "mb-0" %><br>
+    <%= form.text_area :mandatory_requirements, class: "form-control" %>
   </div><br>
 
    <div>
-    <%= form.label :deadline %><br>
-    <%= form.date_field :deadline %>
+    <%= form.label :deadline, class: "mb-0" %><br>
+    <%= form.date_field :deadline, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :total_vacancies %><br>
-    <%= form.number_field :total_vacancies %>
+    <%= form.label :total_vacancies, class: "mb-0" %><br>
+    <%= form.number_field :total_vacancies, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.submit %>
-  </div>
+    <%= form.submit class: "btn btn-outline-secondary" %>
+  </div> 
 <% end %><br>
 

@@ -1,42 +1,42 @@
 
 <%= form_with model: company do |form| %>
   <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "mb-0" %><br>
+    <%= form.text_field :name, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :logo %><br>
-    <%= form.file_field :logo %>
+    <%= form.label :logo, class: "mb-0" %><br>
+    <%= form.file_field :logo, class: "form-control-file mb-3" %>
   </div>
 
   <div>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
+    <%= form.label :description, class: "mb-0" %><br>
+    <%= form.text_area :description, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :address %><br>
-    <%= form.text_area :address %>
+    <%= form.label :address, class: "mb-0" %><br>
+    <%= form.text_area :address, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :cnpj %><br>
-    <%= form.text_field :cnpj %>
+    <%= form.label :cnpj, class: "mb-0" %><br>
+    <%= form.text_field :cnpj, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :site %><br>
-    <%= form.text_field :site %>
+    <%= form.label :site, class: "mb-0" %><br>
+    <%= form.text_field :site, class: "form-control mb-3" %>
   </div>
 
   <div>
-    <%= form.label :social_networks %><br>
-    <%= form.text_field :social_networks %>
+    <%= form.label :social_networks, class: "mb-0" %><br>
+    <%= form.text_field :social_networks, class: "form-control" %>
   </div><br>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-secondary" %>
   </div>
 <% end %><br>
 

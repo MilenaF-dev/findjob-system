@@ -1,56 +1,74 @@
-<h1><%= @company.name %></h1>
-<dl>
-  <div>
-    <% if @company.logo.attached? %>
-      <dt><%= Company.human_attribute_name("logo") %></dt>
-      <%= image_tag @company.logo %>
-    <% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header row no-gutters"> 
+          <% if @company.logo.attached? %>
+            <%= image_tag @company.logo, class: "rounded mx-auto d-block col-3" %>
+          <% end %>
+          <h1 class="col-8 mt-4 mr-3"><%= @company.name %></h1>
+        </div>    
+
+        <div class="card-body ml-3">
+          <dl>
+            <dt><%= Company.human_attribute_name("description") %></dt>
+            <dd><%= @company.description %></dd>
+            <dt><%= Company.human_attribute_name("address") %></dt>
+            <dd><%= @company.address %></dd>
+            <dt><%= Company.human_attribute_name("cnpj") %></dt>
+            <dd><%= @company.cnpj %></dd>
+            <dt><%= Company.human_attribute_name("site") %></dt>
+            <dd><%= @company.site %></dd>
+            <dt><%= Company.human_attribute_name("social_networks") %></dt>
+            <dd><%= @company.social_networks %></dd>
+          </dl>
+
+          <div class="text-center">
+            <% if current_user&.admin? && current_user.company == @company %>
+              <%= link_to t(".edit"), edit_company_path(@company), class: "card-link" %>
+            <% end %>
+
+            <% if current_user&.company == @company %>
+              <%= link_to t(".vacancy_registration"), new_vacancy_path, class: "card-link" %>
+              <%= link_to t(".job_applications"), job_applications_path, class: "card-link" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <dt><%= Company.human_attribute_name("description") %></dt>
-  <dd><%= @company.description %></dd>
-  <dt><%= Company.human_attribute_name("address") %></dt>
-  <dd><%= @company.address %></dd>
-  <dt><%= Company.human_attribute_name("cnpj") %></dt>
-  <dd><%= @company.cnpj %></dd>
-  <dt><%= Company.human_attribute_name("site") %></dt>
-  <dd><%= @company.site %></dd>
-  <dt><%= Company.human_attribute_name("social_networks") %></dt>
-  <dd><%= @company.social_networks %></dd>
-</dl>
 
-<% if current_user&.admin? && current_user.company == @company %>
-  <%= link_to t(".edit"), edit_company_path(@company) %><br>
-<% end %>
-
-<% if current_user&.company == @company %>
-  <%= link_to t(".vacancy_registration"), new_vacancy_path %><br>
-  <%= link_to t(".job_applications"), job_applications_path %><br>
-<% end %>
-
-<h2><%= t(".company_vacancies") %></h2>
-<% if @company.vacancies.empty? %>
-  <div class="warning"><%= t(".no_vacancy_available") %></div>
-<% else %>
-    <dl>
-    <% @company.vacancies.each do |vacancy| %>
-      <% if vacancy.enabled? && vacancy.deadline >= Date.today %>
-        <dt><%= Vacancy.human_attribute_name("title") %></dt>
-        <dd><%= link_to vacancy.title, vacancy_path(vacancy) %></dd>
-        <dt><%= Vacancy.human_attribute_name("description") %></dt>
-        <dd><%= vacancy.description %></dd>
-        <hr>
-      <% elsif current_user&.company == @company %>
-        <dt><%= Vacancy.human_attribute_name("title") %></dt>
-        <dd>
-          <%= link_to vacancy.title, vacancy_path(vacancy) %>
-          <%= vacancy.deadline.past? ? t(".deadline_exceeded") : t(".disabled_vacancy") %>
-        </dd>
-        <dt><%= Vacancy.human_attribute_name("description") %></dt>
-        <dd><%= vacancy.description %></dd>
-        <hr>
+  <h2><%= t(".company_vacancies") %></h2>
+    
+  <div class="row justify-content-center mt-3">
+    <% if @company.vacancies.empty? %>
+      <div class="warning"><%= t(".no_vacancy_available") %></div>
+    <% else %>
+      <% @company.vacancies.each do |vacancy| %>
+        <% if vacancy.enabled? && vacancy.deadline >= Date.today %>
+          <div class="col-12 col-md-8 col-lg-3 mb-2">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title text-center m-0">
+                  <dt><%= link_to vacancy.title, vacancy_path(vacancy) %></dt>
+                </h5>
+                <dd class="mt-2"><%= vacancy.description %></dd>
+              </div>
+            </div>
+          </div>
+        <% elsif current_user&.company == @company %>
+          <div class="col-12 col-md-8 col-lg-3 mb-2">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title text-center m-0">
+                  <dt><%= link_to vacancy.title, vacancy_path(vacancy) %></dt></h5>
+                  <dd class="text-center"><%= vacancy.deadline.past? ? t(".deadline_exceeded") : t(".disabled_vacancy") %></dd>
+                  <dd class="mt-2"><%= vacancy.description %></dd>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-    </dl>
-<% end %>
-
-<%= link_to t("misc.back"), companies_path %>
+  </div>
+</div>

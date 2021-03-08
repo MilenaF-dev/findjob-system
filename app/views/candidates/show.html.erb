@@ -1,20 +1,28 @@
-<% if candidate_signed_in? %>
-  <h1><%= t("misc.my_profile") %></h1>
-<% else %>
-  <h1><%= t("misc.candidate_profile") %></h1>
-<% end %>
+<div class="container">  
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body ml-3">
+          <% if candidate_signed_in? %>
+            <h1><%= t("misc.my_profile") %></h1>
+          <% else %>
+            <h1><%= t("misc.candidate_profile") %></h1>
+          <% end %>
 
-<dl>
-  <dt><%= Candidate.human_attribute_name("full_name") %></dt>
-  <dd><%= @candidate.full_name %></dd>
-  <dt><%= Candidate.human_attribute_name("cpf") %></dt>
-  <dd><%= @candidate.cpf %></dd>
-  <dt><%= Candidate.human_attribute_name("phone") %></dt>
-  <dd><%= @candidate.phone %></dd>
-  <dt><%= Candidate.human_attribute_name("biography") %></dt>
-  <dd><%= @candidate.biography %></dd>
-</dl>
+          <dl>
+            <dt><%= Candidate.human_attribute_name("full_name") %></dt>
+            <dd><%= @candidate.full_name %></dd>
+            <dt><%= Candidate.human_attribute_name("cpf") %></dt>
+            <dd><%= @candidate.cpf %></dd>
+            <dt><%= Candidate.human_attribute_name("phone") %></dt>
+            <dd><%= @candidate.phone %></dd>
+            <dt><%= Candidate.human_attribute_name("biography") %></dt>
+            <dd><%= @candidate.biography %></dd>
+          </dl>
 
-
-<%= link_to t("misc.edit_profile"), edit_candidate_registration_path if candidate_signed_in? %><br>
-<%= link_to t("misc.back"), :back %>
+          <%= link_to t("misc.edit_profile"), edit_candidate_registration_path if candidate_signed_in? %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

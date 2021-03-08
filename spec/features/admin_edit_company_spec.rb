@@ -52,7 +52,6 @@ feature "Admin edit a existent company" do
     expect(page).to have_content("254.345.444./111")
     expect(page).to have_content("algorich.com.br")
     expect(page).to have_content("@algorich.tech")
-    expect(page).to have_link("Voltar")
   end
 
   scenario "and company attributes cannot be blank" do
@@ -81,23 +80,6 @@ feature "Admin edit a existent company" do
     expect(page).to have_content("Endereço completo não pode ficar em branco")
     expect(page).to have_content("CNPJ não pode ficar em branco")
     expect(page).to have_content("Site não pode ficar em branco")
-  end
-
-  scenario "and return to company page" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
-    admin = User.create!(email: "milena@email.com", password: "123456", company: company, admin: true)
-
-    login_as admin
-    visit root_path
-    click_on "Empresas"
-    click_on company.name
-    visit company_path(company)
-    click_on "Editar"
-    click_on "Voltar"
-
-    expect(current_path).to eq company_path(company)
   end
 
   # Passar testes de request para outro arquivo

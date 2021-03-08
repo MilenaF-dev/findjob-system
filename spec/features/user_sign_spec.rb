@@ -271,14 +271,6 @@ feature "User sign in" do
       expect(page).to have_link("Registrar-se")
     end
   end
-
-  scenario "and return to homepage" do
-    visit root_path
-    click_on "Acesso empresa"
-    click_on "Voltar"
-
-    expect(current_path).to eq(root_path)
-  end
 end
 
 feature "User signed in visits company page" do

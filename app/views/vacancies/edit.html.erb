@@ -1,6 +1,9 @@
-<h1><%= t(".vacancy_edit") %></h1>
+<div class="container">  
+  <h1><%= t(".vacancy_edit") %></h1>
 
-<%= render "form", vacancy: @vacancy %>
-
-<%= link_to t("misc.back"), vacancy_path(@vacancy) %>
-
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <%= render "form", vacancy: @vacancy %>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,23 @@
-<h1><%= t(".company_edit") %></h1>
+<div class="container">
+  <h1><%= t(".company_edit") %></h1>
 
-<% if @company.errors.any? %>
-  <div class="alert">
-    <% if @company.persisted? %>
-      <p><%= t(".edit_error") %></p>
-    <% end %>
-    <p><%= t(".all_errors") %></p>
-    <ul>
-      <% @company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="row  justify-content-center form-group">
+    <div class="col-4">
+      <% if @company.errors.any? %>
+        <div class="alert">
+          <% if @company.persisted? %>
+            <p><%= t(".edit_error") %></p>
+          <% end %>
+          <p><%= t(".all_errors") %></p>
+          <ul>
+            <% @company.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+
+      <%= render "form", company: @company %>
+    </div>
   </div>
-<% end %>
-
-<%= render "form", company: @company %>
-
-<%= link_to t("misc.back"), company_path(@company) %>
+</div>

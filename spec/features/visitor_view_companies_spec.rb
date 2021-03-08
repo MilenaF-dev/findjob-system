@@ -60,19 +60,6 @@ feature "Visitor view companies" do
 
     expect(current_path).to eq root_path
   end
-
-  scenario "and return to companies page" do
-    company = Company.create!(name: "Algorich", description: "Empresa de desenvolvimento de softwares",
-                              address: "Praça II, nº10, Flamboyant, Campos dos Goytacazes-RJ",
-                              cnpj: "123.234.333/000", site: "algorich.com.br", social_networks: "@algorich")
-
-    visit root_path
-    click_on "Empresas"
-    click_on company.name
-    click_on "Voltar"
-
-    expect(current_path).to eq companies_path
-  end
 end
 
 feature "Visitor search for companies name" do

@@ -12,7 +12,7 @@
   </div>
 
   <% if @vacancies.empty? %>
-    <div class="warning"><%= t(".no_vacancy_available") %></div>
+    <div class="warning text-center mt-3"><%= t(".no_vacancy_available") %></div>
   <% else %>
       <div class="row justify-content-center mt-3">
         <% @vacancies.each do |vacancy| %>

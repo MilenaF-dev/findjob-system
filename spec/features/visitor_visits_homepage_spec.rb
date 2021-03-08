@@ -82,9 +82,7 @@ feature "Visitor search for vacancies and companies" do
 
     expect(current_path).to eq(search_path)
     expect(page).to have_link("Algorich")
-    expect(page).to have_content("Empresa de desenvolvimento de softwares")
     expect(page).not_to have_link("Americanas")
-    expect(page).not_to have_content("Varejo de diversos produtos")
   end
 
   scenario "no results found" do
@@ -108,7 +106,7 @@ feature "Visitor search for vacancies and companies" do
     visit root_path
     fill_in "Pesquise por vagas e empresas", with: "Americanas"
     click_on "Pesquisar"
-    click_on "Voltar"
+    click_on "Home"
 
     expect(current_path).to eq(root_path)
   end
