@@ -87,6 +87,12 @@ feature "Employee evaluate applications" do
     job_application = JobApplication.create!(vacancy: vacancy, candidate: candidate)
     employee = User.create!(email: "milena@email.com", password: "123456", company: company, admin: false)
 
+    mailer_spy = class_spy("NotificationsMailer")
+    mail_double = double("mail")
+    allow(mailer_spy).to receive(:feedback_email).with(any_args).and_return(mail_double)
+    allow(mail_double).to receive(:deliver_later)
+    stub_const("NotificationsMailer", mailer_spy)
+
     login_as employee, scope: :user
     visit company_path(company)
     click_on "Candidaturas"
@@ -97,6 +103,7 @@ feature "Employee evaluate applications" do
     fill_in "Data de início", with: "22/03/2021"
     click_on "Enviar feedback"
 
+    expect(mailer_spy).to have_received(:feedback_email).with(Feedback.last)
     expect(current_path).to eq(job_applications_path)
     expect(page).to have_content("Proposta enviada")
   end

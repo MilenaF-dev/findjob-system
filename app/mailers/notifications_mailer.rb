@@ -1,8 +1,8 @@
 class NotificationsMailer < ApplicationMailer
-  def job_application_email(candidate, vacancy, company)
-    @company = company
-    @vacancy = vacancy
-    @candidate = candidate
+  def job_application_email(job_application)
+    @vacancy = job_application.vacancy
+    @company = @vacancy.company
+    @candidate = job_application.candidate
     mail(to: @candidate.email, subject: "Candidatura realizada com sucesso")
   end
 

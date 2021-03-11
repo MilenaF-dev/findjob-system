@@ -46,11 +46,18 @@ feature "Candidate applies for a vacancy" do
                                   biography: "Tenho 25 anos, formada em Economia",
                                   email: "carlos@mail.com", password: "123456")
 
+    mail_double = double("mail")
+    allow(mail_double).to receive(:job_application_email).with(any_args).and_return(mail_double)
+    allow(mail_double).to receive(:deliver_later)
+    stub_const("NotificationsMailer", mail_double)
+
     login_as candidate, scope: :candidate
     visit vacancy_path(vacancy)
     click_on "Aplicar para esta vaga"
 
     vacancy.reload
+    expect(mail_double).to have_received(:job_application_email).with(JobApplication.last)
+    expect(mail_double).to have_received(:deliver_later)
     expect(current_path).to eq(vacancy_path(vacancy))
     expect(JobApplication.last.vacancy).to eq(vacancy)
     expect(page).to have_content("Candidatura realizada com sucesso!")

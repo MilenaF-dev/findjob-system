@@ -21,7 +21,11 @@ RSpec.describe NotificationsMailer, type: :mailer do
                       deadline: "22/10/2021", total_vacancies: "3", company: company, status: :enabled)
     end
 
-    let(:mail) { described_class.job_application_email(candidate, vacancy, company).deliver_now }
+    let(:job_application) do
+      JobApplication.create!(candidate: candidate, vacancy: vacancy)
+    end
+
+    let(:mail) { described_class.job_application_email(job_application).deliver_now }
 
     it "renders the subject" do
       expect(mail.subject).to eq("Candidatura realizada com sucesso")
