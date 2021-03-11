@@ -1,5 +1,5 @@
 class AnswerController < ApplicationController
-    before_action :authenticate_candidate!
+  before_action :authenticate_candidate!
 
   def new
     @feedback = Feedback.find(params[:feedback_id])
